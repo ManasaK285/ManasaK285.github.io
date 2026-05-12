@@ -275,6 +275,7 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
   <div class="nav-logo">Manasanjani <span>Kondapi</span></div>
   <div class="nav-links">
     <a href="#projects">projects</a>
+    <a href="#notebooks">notebooks</a>
     <a href="#experience">experience</a>
     <a href="#education">education</a>
     <a href="#certifications">certifications</a>
@@ -442,7 +443,7 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
       <div class="project-card-inner">
         <div class="project-top">
           <div class="project-title-row"><h3 class="project-title">Medical QA LLM Agent with Automated Evaluation &amp; Retraining</h3><span class="project-arrow">↗</span></div>
-          <span class="pbadge pbadge-research">UMD Course Project</span>
+          <span class="pbadge pbadge-research">NLP · LLMOps</span>
         </div>
         <p class="project-desc">Fine-tuned LLaMA 3 via QLoRA (4-bit quantization) for clinical domain adaptation with a full RAG pipeline (LangChain, SBERT, Pinecone, hybrid retrieval). Core innovation: multi-signal anomaly detection monitoring retrieval quality (MRR/precision@k), embedding distribution drift, and LLM inference confidence — two-of-three threshold crossing triggers automated retraining via Vertex AI Pipelines. Calibrated via synthetic perturbation experiments with no labeled failure examples. Caught two genuine distributional shifts standard accuracy metrics missed. Deployed on AWS EC2 with multi-GPU PyTorch and TensorRT optimization.</p>
         <div class="project-metrics">
@@ -456,7 +457,7 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
       </div>
       <div class="project-footer">
         <span class="project-repo">github.com/ManasaK285/AI ↗</span>
-        <span class="project-type">Course Project · NLP · LLMOps</span>
+        <span class="project-type">NLP · Course Project · LLMOps</span>
       </div>
     </a>
 
@@ -466,7 +467,7 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
       <div class="project-card-inner">
         <div class="project-top">
           <div class="project-title-row"><h3 class="project-title">Multimodal Traffic State Prediction — Weather-Gated Fusion &amp; Scene Graph Attention</h3><span class="project-arrow">↗</span></div>
-          <span class="pbadge pbadge-research">UMD 2026 · MSML640</span>
+          <span class="pbadge pbadge-research">Research</span>
         </div>
         <p class="project-desc">Five-stage multimodal pipeline classifying traffic frames into Free/Moderate/Congested using only a single camera + weather metadata. Primary contributions: WeatherTimeEncoder MLP (6-dim → R⁶⁴, sinusoidal time + one-hot weather), Fusion MLP ([128,64] → R³², BatchNorm + ReLU + Dropout 0.2). Sole contributor to B5 Weather-Gated Attention: learned scalar gate G(wt) = σ(Wgwt + bg) modulating GAT edge attention logits (2,113 params). BDD100K integration (35,651 frames, 4 weather conditions), 3-page Streamlit dashboard, Docker containerisation. 5-variant ablation B1–B5 with per-weather, sigma sensitivity, and latency benchmarking.</p>
         <div class="project-metrics">
@@ -562,11 +563,66 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
   </div>
 </section>
 
+  </div>
+</section>
+
+<!-- KAGGLE / AI NOTEBOOK PROJECTS -->
+<div class="full-section alt-section" id="notebooks">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">AI Notebook Projects</h2>
+    </div>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:1.5rem;font-weight:300;line-height:1.8;">
+      Beyond the flagship projects above, a library of <strong style="color:var(--text);">applied ML notebooks</strong> covering the full spectrum of AI/ML — spanning NLP, computer vision, deep learning, time-series, recommender systems, and GenAI. Available at <a href="https://github.com/ManasaK285/AI" target="_blank" style="color:#c4b5fd;">github.com/ManasaK285/AI</a>.
+    </p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:1.5rem;">
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;">
+        <div style="font-family:var(--mono);font-size:10px;color:#c4b5fd;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;">NLP & LLMs</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:300;line-height:1.6;">Sentiment analysis (LSTM, RoBERTa, PyTorch), fake news detection, emotion detection, LLM telemetry, fine-tuned DistilBERT, multilingual text classification, extractive summarisation (Pegasus), semantic search (SBERT, TF-IDF), RAG pipelines, multi-modal conversational QA, OpenBookQA multi-step reasoning.</div>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--emerald);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;">Computer Vision & Deep Learning</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:300;line-height:1.6;">CNN/ResNet/EfficientNet image classification (CIFAR-10, medical imaging, fruit freshness, skin classification), YOLOv8 car detection, YOLO11 fall & lying down detection, DETR vehicle detection, bone fracture detection (YOLOv26), GAN (DCGAN), image denoising autoencoder, CNN-LSTM hybrid, zero-shot image classification, Faster R-CNN kidney stone detection.</div>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--amber);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;">Time Series & Forecasting</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:300;line-height:1.6;">LSTM stock prediction (Google, NVIDIA, Honda), PROPHET avocado & Chicago crime forecasting, LSTM driver behaviour prediction, daily Nifty/Sensex prediction, LSTM geophone sensor modelling, LSTM sentiment on e-commerce reviews, stock market ML (Linear Regression), energy consumption prediction, Apple stock EDA + ML (2025).</div>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--pink);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;">Recommender Systems</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:300;line-height:1.6;">Book recommendation (collaborative filtering), hotel recommendation ML, Udemy NLP-based recommendation, movie recommender, multi-cuisine recipe recommendation, similar research paper retrieval (SBERT), hybrid data + LLM brand pipeline, customer shopping clustering, copy & edit semantic search (TF-IDF + SpaCy + SBERT).</div>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--sky);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;">Healthcare & Bioinformatics</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:300;line-height:1.6;">Medical chatbot (Psy), disease prediction, cancer cell classification, breast cancer detection, mammography DL, healthcare NLP (symptom-disease), cirrhosis diagnostic model, heart attack & heart disease classification, stroke prediction, Parkinson's UPDRS prediction, COVID-19 fatality analysis, rare disease LLM evaluation, blood cell anomaly detection, survival analysis SARS-CoV-II.</div>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;">Analytics, Finance & Other</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:300;line-height:1.6;">Credit card fraud detection, financial fraud detection, US election 2024 sentiment on X, AB testing for website optimisation, AI vs human text classification, supply chain GNN + NLP dashboard, quantum circuit fault logs (NISQ simulations), cybersecurity analysis, DDoS attack EDA, AI video generation benchmark analysis, API failure intelligence dataset, developer burnout prediction.</div>
+      </div>
+
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <a href="https://github.com/ManasaK285/AI" target="_blank" style="font-family:var(--mono);font-size:11px;padding:8px 18px;border-radius:20px;background:var(--violet-light);color:#c4b5fd;border:1px solid rgba(124,58,237,0.3);text-decoration:none;">View all notebooks on GitHub ↗</a>
+      <span style="font-family:var(--mono);font-size:11px;padding:8px 18px;border-radius:20px;background:var(--emerald-light);color:var(--emerald);border:1px solid rgba(16,185,129,0.3);">Jupyter Notebooks</span>
+      <span style="font-family:var(--mono);font-size:11px;padding:8px 18px;border-radius:20px;background:var(--amber-light);color:var(--amber);border:1px solid rgba(245,158,11,0.3);">Jupyter · PyTorch · scikit-learn · HuggingFace</span>
+    </div>
+  </div>
+</div>
+
+
 <!-- EXPERIENCE -->
 <div class="full-section alt-section" id="experience">
   <div class="section-inner">
     <div class="section-header">
-      <span class="section-num">02</span>
+      <span class="section-num">03</span>
       <h2 class="section-title">Experience</h2>
     </div>
     <div class="exp-timeline">
@@ -674,7 +730,7 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
 <div class="full-section alt-section" id="certifications">
   <div class="section-inner">
     <div class="section-header">
-      <span class="section-num">04</span>
+      <span class="section-num">05</span>
       <h2 class="section-title">Certifications</h2>
     </div>
     <div class="cert-hero">
