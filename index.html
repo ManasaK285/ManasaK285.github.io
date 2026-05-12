@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manasanjani Kondapi — ML Engineer & AI Researcher</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #1a1a2e;
+  --bg2: #1f1f38;
+  --bg3: #252540;
+  --card: #22223a;
+  --card2: #282845;
+  --text: #f2f2ff;
+  --muted: #a8a8cc;
+  --faint: #6868a0;
+  --border: rgba(150,110,255,0.18);
+  --border2: rgba(150,110,255,0.35);
+  --violet: #7c3aed;
+  --violet-light: rgba(124,58,237,0.15);
+  --violet-glow: rgba(139,92,246,0.45);
+  --emerald: #10b981;
+  --emerald-light: rgba(16,185,129,0.12);
+  --pink: #ec4899;
+  --pink-light: rgba(236,72,153,0.12);
+  --amber: #f59e0b;
+  --amber-light: rgba(245,158,11,0.12);
+  --sky: #0ea5e9;
+  --sky-light: rgba(14,165,233,0.12);
+  --sans: 'Inter', system-ui, sans-serif;
+  --display: 'Fraunces', Georgia, serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.7; overflow-x: hidden; }
+
+/* animated grid bg */
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image: linear-gradient(rgba(160,120,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(160,120,255,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+body::after {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(ellipse 80% 60% at 10% 20%, rgba(124,58,237,0.1) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 90% 80%, rgba(16,185,129,0.07) 0%, transparent 60%);
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(26,26,46,0.9); backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.875rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.nav-logo { font-family: var(--display); font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+.nav-logo span { color: var(--violet); }
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+
+/* HERO */
+.hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 3rem 5rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-inner { display: grid; grid-template-columns: 1fr 380px; gap: 5rem; align-items: center; }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 11px; color: var(--violet);
+  background: var(--violet-light); padding: 5px 14px; border-radius: 20px;
+  border: 1px solid rgba(124,58,237,0.3); letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 1.5rem;
+  animation: pulse-border 3s ease infinite;
+}
+@keyframes pulse-border { 0%,100%{border-color:rgba(124,58,237,0.3);}50%{border-color:rgba(124,58,237,0.6);} }
+.hero-eyebrow::before { content:''; width:6px;height:6px;border-radius:50%;background:var(--violet);animation:blink 2s ease infinite; }
+@keyframes blink { 0%,100%{opacity:1;}50%{opacity:0.3;} }
+
+.hero-name { font-family: var(--display); font-size: clamp(2.8rem,5.5vw,5rem); line-height:1.05; margin-bottom:0.5rem; font-weight:800; letter-spacing:-0.03em; }
+.hero-name em { font-style:normal; background: linear-gradient(135deg, #a78bfa, #7c3aed, #ec4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero-subtitle { font-size:1.1rem; color:var(--muted); margin-bottom:1.75rem; font-weight:400; }
+.hero-bio { font-size:14.5px; color:var(--muted); line-height:1.9; margin-bottom:2rem; font-weight:300; }
+.hero-bio strong { color:var(--text); font-weight:500; }
+
+.hero-tags { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:2rem; }
+.tag { font-family:var(--mono); font-size:10px; letter-spacing:0.05em; padding:4px 12px; border-radius:20px; font-weight:500; border:1px solid; }
+.tag-violet { background:var(--violet-light); color:#c4b5fd; border-color:rgba(124,58,237,0.3); }
+.tag-emerald { background:var(--emerald-light); color:var(--emerald); border-color:rgba(16,185,129,0.3); }
+.tag-pink { background:var(--pink-light); color:var(--pink); border-color:rgba(236,72,153,0.3); }
+.tag-amber { background:var(--amber-light); color:var(--amber); border-color:rgba(245,158,11,0.3); }
+.tag-sky { background:var(--sky-light); color:var(--sky); border-color:rgba(14,165,233,0.3); }
+
+.hero-cta { display:flex; gap:10px; flex-wrap:wrap; }
+.btn-primary { font-family:var(--sans); font-size:13px; font-weight:500; padding:11px 26px; border-radius:8px; text-decoration:none; background:var(--violet); color:#fff; transition:all 0.2s; box-shadow:0 0 24px var(--violet-glow); }
+.btn-primary:hover { background:#6d28d9; transform:translateY(-1px); box-shadow:0 4px 32px var(--violet-glow); }
+.btn-outline { font-family:var(--sans); font-size:13px; font-weight:400; padding:11px 22px; border-radius:8px; text-decoration:none; background:transparent; color:var(--muted); border:1px solid var(--border2); transition:all 0.2s; }
+.btn-outline:hover { color:var(--text); border-color:rgba(124,58,237,0.5); background:var(--violet-light); }
+
+/* HERO CARD */
+.hero-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:2rem; box-shadow:0 0 60px rgba(124,58,237,0.08); position:relative; overflow:hidden; }
+.hero-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, var(--violet), var(--pink), var(--emerald)); }
+.hcard-avatar { width:52px; height:52px; border-radius:12px; background:linear-gradient(135deg, var(--violet), var(--pink)); display:flex; align-items:center; justify-content:center; font-family:var(--display); font-size:18px; color:#fff; font-weight:800; margin-bottom:1rem; }
+.hcard-name { font-family:var(--display); font-size:16px; font-weight:700; margin-bottom:2px; letter-spacing:-0.01em; }
+.hcard-role { font-size:12px; color:var(--muted); margin-bottom:1.25rem; }
+.hcard-divider { height:1px; background:var(--border); margin-bottom:1.25rem; }
+.hcard-stats { display:flex; flex-direction:column; gap:9px; margin-bottom:1.25rem; }
+.hcard-stat { display:flex; justify-content:space-between; }
+.hcard-stat-label { font-size:12px; color:var(--muted); }
+.hcard-stat-val { font-family:var(--mono); font-size:11px; color:var(--text); font-weight:500; }
+.hcard-badges { display:flex; flex-direction:column; gap:7px; padding-top:1.25rem; border-top:1px solid var(--border); }
+.hcard-badge { font-family:var(--mono); font-size:10px; letter-spacing:0.04em; padding:6px 10px; border-radius:6px; display:flex; align-items:center; gap:7px; }
+.hcard-badge::before { content:''; width:5px; height:5px; border-radius:50%; flex-shrink:0; }
+.hcard-badge.pub { background:var(--amber-light); color:var(--amber); border:1px solid rgba(245,158,11,0.2); }
+.hcard-badge.pub::before { background:var(--amber); }
+.hcard-badge.sf { background:var(--violet-light); color:#c4b5fd; border:1px solid rgba(124,58,237,0.2); }
+.hcard-badge.sf::before { background:var(--violet); }
+.hcard-badge.gpa { background:var(--emerald-light); color:var(--emerald); border:1px solid rgba(16,185,129,0.2); }
+.hcard-badge.gpa::before { background:var(--emerald); }
+
+/* STATS */
+.stats-band { padding:2.75rem 3rem; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--bg2); position:relative; z-index:1; }
+.stats-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(5,1fr); gap:2rem; text-align:center; }
+.stat-num { font-family:var(--display); font-size:2.4rem; color:var(--text); line-height:1; margin-bottom:6px; font-weight:800; letter-spacing:-0.03em; }
+.stat-num span { color:#c4b5fd; }
+.stat-label { font-family:var(--mono); font-size:10px; color:var(--faint); letter-spacing:0.1em; text-transform:uppercase; }
+
+/* SECTIONS */
+.section { padding:5.5rem 3rem; max-width:1200px; margin:0 auto; position:relative; z-index:1; }
+.full-section { padding:5.5rem 3rem; position:relative; z-index:1; }
+.alt-section { background:var(--bg2); }
+.section-inner { max-width:1200px; margin:0 auto; }
+.section-header { display:flex; align-items:center; gap:1rem; margin-bottom:3rem; }
+.section-num { font-family:var(--mono); font-size:11px; color:var(--violet); background:var(--violet-light); padding:3px 10px; border-radius:20px; border:1px solid rgba(124,58,237,0.2); }
+.section-title { font-family:var(--display); font-size:1.9rem; font-weight:700; letter-spacing:-0.02em; }
+.section-hint { font-size:12px; color:var(--faint); margin-left:auto; }
+
+/* PROJECT CARDS */
+.projects-list { display:flex; flex-direction:column; gap:14px; }
+.project-card { background:var(--card); border:1px solid var(--border); border-radius:12px; overflow:hidden; text-decoration:none; color:inherit; display:block; transition:box-shadow 0.25s,transform 0.2s,border-color 0.2s; }
+.project-card:hover { box-shadow:0 0 40px rgba(124,58,237,0.12); transform:translateY(-2px); border-color:var(--border2); }
+.project-accent { height:2px; }
+.project-accent.violet { background:linear-gradient(90deg, var(--violet), #a78bfa); }
+.project-accent.emerald { background:linear-gradient(90deg, var(--emerald), #34d399); }
+.project-accent.pink { background:linear-gradient(90deg, var(--pink), #f9a8d4); }
+.project-accent.amber { background:linear-gradient(90deg, var(--amber), #fcd34d); }
+.project-accent.sky { background:linear-gradient(90deg, var(--sky), #7dd3fc); }
+.project-card-inner { padding:1.75rem 2rem 1.5rem; }
+.project-top { display:flex; align-items:flex-start; justify-content:space-between; gap:1.5rem; margin-bottom:0.875rem; }
+.project-title-row { display:flex; align-items:center; gap:8px; }
+.project-title { font-family:var(--display); font-size:1.15rem; font-weight:600; color:var(--text); letter-spacing:-0.01em; }
+.project-arrow { font-size:13px; color:var(--faint); transition:color 0.2s,transform 0.2s; }
+.project-card:hover .project-arrow { color:var(--violet); transform:translate(2px,-2px); }
+.pbadge { font-family:var(--mono); font-size:10px; letter-spacing:0.04em; padding:3px 10px; border-radius:20px; white-space:nowrap; flex-shrink:0; border:1px solid; }
+.pbadge-pub { background:var(--amber-light); color:var(--amber); border-color:rgba(245,158,11,0.3); }
+.pbadge-prod { background:var(--emerald-light); color:var(--emerald); border-color:rgba(16,185,129,0.3); }
+.pbadge-hack { background:var(--violet-light); color:#c4b5fd; border-color:rgba(124,58,237,0.3); }
+.pbadge-research { background:var(--sky-light); color:var(--sky); border-color:rgba(14,165,233,0.3); }
+.pbadge-rl { background:var(--pink-light); color:var(--pink); border-color:rgba(236,72,153,0.3); }
+.pbadge-finalist { background:rgba(245,158,11,0.2); color:var(--amber); border-color:rgba(245,158,11,0.4); }
+.project-desc { font-size:13.5px; color:var(--muted); line-height:1.85; margin-bottom:1.25rem; font-weight:300; }
+.project-metrics { display:flex; gap:1.5rem; margin-bottom:1.25rem; flex-wrap:wrap; padding:0.875rem 1rem; background:rgba(124,58,237,0.05); border-radius:8px; border:1px solid var(--border); }
+.metric { font-family:var(--mono); font-size:12px; }
+.metric strong { color:#c4b5fd; font-weight:600; display:block; font-size:14px; }
+.metric span { color:var(--faint); font-size:10px; }
+.tech-stack { display:flex; flex-wrap:wrap; gap:5px; }
+.tech-pill { font-family:var(--mono); font-size:10px; letter-spacing:0.03em; padding:3px 9px; border-radius:20px; background:var(--bg3); color:var(--muted); border:1px solid var(--border); transition:border-color 0.15s; }
+.tech-pill:hover { border-color:var(--border2); color:var(--text); }
+.project-footer { display:flex; align-items:center; justify-content:space-between; padding:0.875rem 2rem; border-top:1px solid var(--border); background:var(--bg2); }
+.project-repo { font-family:var(--mono); font-size:11px; color:var(--violet); }
+.project-type { font-family:var(--mono); font-size:10px; color:var(--faint); }
+
+/* EXPERIENCE */
+.exp-timeline { display:flex; flex-direction:column; }
+.exp-item { display:grid; grid-template-columns:190px 1fr; gap:2rem; padding:2.25rem 0; border-bottom:1px solid var(--border); }
+.exp-item:last-child { border-bottom:none; }
+.exp-period { font-family:var(--mono); font-size:11px; color:var(--faint); margin-bottom:8px; }
+.exp-ebadge { font-family:var(--mono); font-size:10px; padding:3px 10px; border-radius:20px; display:inline-block; border:1px solid; }
+.exp-role { font-family:var(--display); font-size:1.1rem; font-weight:600; margin-bottom:3px; letter-spacing:-0.01em; }
+.exp-company { font-family:var(--mono); font-size:12px; color:#c4b5fd; margin-bottom:1rem; }
+.exp-points { list-style:none; display:flex; flex-direction:column; gap:7px; margin-bottom:1rem; }
+.exp-points li { font-size:13.5px; color:var(--muted); line-height:1.75; padding-left:1.25rem; position:relative; font-weight:300; }
+.exp-points li::before { content:'→'; position:absolute; left:0; color:var(--violet); font-size:11px; top:3px; }
+.exp-tags { display:flex; flex-wrap:wrap; gap:5px; }
+
+/* EDUCATION */
+.edu-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.edu-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:2rem; position:relative; overflow:hidden; transition:border-color 0.2s; }
+.edu-card:hover { border-color:var(--border2); }
+.edu-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.edu-card.primary::before { background:linear-gradient(90deg, var(--violet), var(--pink)); }
+.edu-card.secondary::before { background:linear-gradient(90deg, var(--emerald), var(--sky)); }
+.edu-school { font-family:var(--display); font-size:1.05rem; font-weight:600; margin-bottom:5px; letter-spacing:-0.01em; }
+.edu-degree { font-size:13px; color:var(--muted); margin-bottom:5px; }
+.edu-meta { font-family:var(--mono); font-size:11px; color:var(--faint); }
+.edu-gpa { font-family:var(--mono); font-size:13px; color:var(--emerald); font-weight:600; margin-top:12px; }
+.edu-courses { font-size:12px; color:var(--faint); margin-top:10px; line-height:1.65; }
+
+/* CERTIFICATIONS */
+.cert-hero { display:flex; align-items:center; gap:2rem; margin-bottom:2rem; padding-bottom:2rem; border-bottom:1px solid var(--border); }
+.cert-num { font-family:var(--display); font-size:5rem; color:var(--violet); line-height:1; font-weight:800; }
+.cert-text-label { font-family:var(--display); font-size:1.3rem; font-weight:700; }
+.cert-text-sub { font-size:13px; color:var(--muted); font-weight:300; }
+.certs-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:8px; margin-bottom:1.5rem; }
+.cert-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:0.75rem 1rem; font-size:12.5px; color:var(--muted); display:flex; align-items:flex-start; gap:8px; line-height:1.5; transition:border-color 0.15s; }
+.cert-card:hover { border-color:var(--border2); }
+.cert-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; margin-top:5px; }
+.cert-dot.violet { background:var(--violet); }
+.cert-dot.emerald { background:var(--emerald); }
+.cert-dot.amber { background:var(--amber); }
+.cert-dot.pink { background:var(--pink); }
+.tb-bar { background:linear-gradient(135deg, rgba(124,58,237,0.2), rgba(16,185,129,0.1)); border:1px solid rgba(124,58,237,0.3); border-radius:12px; padding:1.5rem 2rem; display:flex; gap:3rem; flex-wrap:wrap; align-items:center; }
+.tb-item { font-family:var(--mono); font-size:12px; color:var(--muted); }
+.tb-item strong { display:block; font-size:1.6rem; color:#c4b5fd; margin-bottom:2px; font-family:var(--display); font-weight:800; }
+
+/* AWARDS */
+.awards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; }
+.award-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:1.25rem 1.5rem; display:flex; gap:12px; align-items:flex-start; transition:border-color 0.15s; }
+.award-card:hover { border-color:var(--border2); }
+.award-icon { width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
+.award-icon.gold { background:var(--amber-light); }
+.award-icon.violet { background:var(--violet-light); }
+.award-icon.emerald { background:var(--emerald-light); }
+.award-icon.pink { background:var(--pink-light); }
+.award-title { font-size:13px; font-weight:500; margin-bottom:2px; color:var(--text); }
+.award-sub { font-size:12px; color:var(--muted); font-weight:300; }
+
+/* CONTACT */
+.contact-section { padding:6rem 3rem; position:relative; z-index:1; background:var(--bg2); border-top:1px solid var(--border); }
+.contact-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:start; }
+.contact-eyebrow { font-family:var(--mono); font-size:11px; color:var(--violet); letter-spacing:0.14em; text-transform:uppercase; margin-bottom:1rem; display:inline-flex; align-items:center; gap:8px; }
+.contact-eyebrow::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--violet); }
+.contact-headline { font-family:var(--display); font-size:2.5rem; font-weight:800; line-height:1.15; margin-bottom:1.25rem; letter-spacing:-0.03em; }
+.contact-headline em { font-style:normal; background:linear-gradient(135deg, #a78bfa, #ec4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.contact-sub { font-size:14px; color:var(--muted); line-height:1.85; font-weight:300; }
+.contact-links { display:flex; flex-direction:column; gap:10px; }
+.contact-link { display:flex; align-items:center; gap:14px; padding:1rem 1.25rem; border-radius:10px; border:1px solid var(--border); background:var(--card); text-decoration:none; transition:all 0.15s; }
+.contact-link:hover { border-color:rgba(124,58,237,0.4); background:var(--violet-light); }
+.contact-link-icon { width:34px; height:34px; border-radius:8px; background:var(--violet-light); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:11px; color:#c4b5fd; flex-shrink:0; }
+.contact-link-label { font-size:10px; color:var(--faint); font-family:var(--mono); display:block; letter-spacing:0.05em; margin-bottom:1px; }
+.contact-link-value { font-size:13px; color:var(--text); }
+
+footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5rem 3rem; display:flex; justify-content:space-between; font-family:var(--mono); font-size:11px; color:var(--faint); letter-spacing:0.05em; }
+
+/* FILTER TABS */
+.filter-bar { display:flex; gap:8px; margin-bottom:2rem; flex-wrap:wrap; }
+.filter-btn { font-family:var(--mono); font-size:11px; padding:5px 14px; border-radius:20px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; transition:all 0.15s; letter-spacing:0.04em; }
+.filter-btn:hover, .filter-btn.active { background:var(--violet-light); color:#c4b5fd; border-color:rgba(124,58,237,0.3); }
+.project-card.hidden { display:none; }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
+.hero-left > * { animation:fadeUp 0.55s ease both; }
+.hero-left > *:nth-child(1){animation-delay:0.1s;}
+.hero-left > *:nth-child(2){animation-delay:0.2s;}
+.hero-left > *:nth-child(3){animation-delay:0.3s;}
+.hero-left > *:nth-child(4){animation-delay:0.4s;}
+.hero-left > *:nth-child(5){animation-delay:0.5s;}
+.hero-left > *:nth-child(6){animation-delay:0.6s;}
+.hero-card { animation:fadeUp 0.55s ease 0.3s both; }
+
+@media(max-width:800px){
+  .hero-inner{grid-template-columns:1fr;} .hero-card{display:none;}
+  .stats-inner{grid-template-columns:repeat(3,1fr);}
+  .exp-item{grid-template-columns:1fr;gap:0.5rem;}
+  .edu-grid{grid-template-columns:1fr;}
+  .contact-inner{grid-template-columns:1fr;gap:3rem;}
+  nav{padding:1rem 1.5rem;} .nav-links{gap:1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Manasanjani <span>Kondapi</span></div>
+  <div class="nav-links">
+    <a href="#projects">projects</a>
+    <a href="#experience">experience</a>
+    <a href="#education">education</a>
+    <a href="#certifications">certifications</a>
+    <a href="#awards">awards</a>
+    <a href="#contact">contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">ML Engineer &amp; AI Researcher</div>
+      <h1 class="hero-name">Manasanjani<br><em>Kondapi</em></h1>
+      <p class="hero-subtitle">Building AI systems that work in the real world.</p>
+      <p class="hero-bio">MS in Applied Machine Learning, <strong>University of Maryland</strong> (GPA 4.0, May 2026). Four years at <strong>Deloitte</strong> and <strong>Welspot</strong> deploying production AI agents, RAG pipelines, and multimodal ML systems for Fortune 500 clients. <strong>Agentblazer Champion 2026</strong>, 16x Salesforce Certified. Research forthcoming at <strong>RSS 2026</strong>. AGA Datathon <strong>Finalist 2026</strong>.</p>
+      <div class="hero-tags">
+        <span class="tag tag-violet">LLMs &amp; Agents</span>
+        <span class="tag tag-emerald">Multimodal ML</span>
+        <span class="tag tag-pink">Robotics &amp; RL</span>
+        <span class="tag tag-amber">Salesforce / Agentforce</span>
+        <span class="tag tag-sky">PyTorch · GCP · AWS</span>
+      </div>
+      <div class="hero-cta">
+        <a href="mailto:manasa.kondapi@gmail.com" class="btn-primary">Get in touch</a>
+        <a href="https://linkedin.com/in/manasanjani-kondapi-92179b18" target="_blank" class="btn-outline">LinkedIn ↗</a>
+        <a href="https://github.com/ManasaK285/AI" target="_blank" class="btn-outline">GitHub ↗</a>
+        <a href="https://salesforce.com/trailblazer/kmanasa369" target="_blank" class="btn-outline">Trailblazer ↗</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hcard-avatar">MK</div>
+      <div class="hcard-name">Manasanjani Kondapi</div>
+      <div class="hcard-role">ML Engineer · College Park, MD · Open to relocation</div>
+      <div class="hcard-divider"></div>
+      <div class="hcard-stats">
+        <div class="hcard-stat"><span class="hcard-stat-label">Experience</span><span class="hcard-stat-val">4+ years</span></div>
+        <div class="hcard-stat"><span class="hcard-stat-label">Salesforce certs</span><span class="hcard-stat-val">16x + Agentblazer</span></div>
+        <div class="hcard-stat"><span class="hcard-stat-label">Trailhead badges</span><span class="hcard-stat-val">383 · 13 Superbadges</span></div>
+        <div class="hcard-stat"><span class="hcard-stat-label">Availability</span><span class="hcard-stat-val">May 2026 · OPT</span></div>
+        <div class="hcard-stat"><span class="hcard-stat-label">Phone</span><span class="hcard-stat-val">+1 (240) 305-4455</span></div>
+      </div>
+      <div class="hcard-badges">
+        <div class="hcard-badge pub">RSS 2026 — forthcoming publication</div>
+        <div class="hcard-badge pub">AGA Datathon 2026 — Finalist</div>
+        <div class="hcard-badge sf">Agentblazer Champion 2026</div>
+        <div class="hcard-badge gpa">GPA 4.0 — MS Applied ML, UMD</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stats-inner">
+    <div><div class="stat-num">4<span>+</span></div><div class="stat-label">years experience</div></div>
+    <div><div class="stat-num">173<span>K</span></div><div class="stat-label">frames evaluated</div></div>
+    <div><div class="stat-num">10<span>K+</span></div><div class="stat-label">VLA trajectory pairs</div></div>
+    <div><div class="stat-num">3<span>K</span></div><div class="stat-label">RL training episodes</div></div>
+    <div><div class="stat-num">16<span>x</span></div><div class="stat-label">Salesforce certified</div></div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Projects &amp; Research</h2>
+    <span class="section-hint">Click any card to open the repository</span>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
+    <button class="filter-btn" onclick="filterProjects('agent', this)">AI Agents</button>
+    <button class="filter-btn" onclick="filterProjects('ml', this)">ML / Vision</button>
+    <button class="filter-btn" onclick="filterProjects('robotics', this)">Robotics</button>
+    <button class="filter-btn" onclick="filterProjects('research', this)">Research</button>
+    <button class="filter-btn" onclick="filterProjects('data', this)">Data / Analytics</button>
+  </div>
+
+  <div class="projects-list" id="projects-list">
+
+    <!-- SECOND OPINION -->
+    <a class="project-card" href="https://github.com/ClutchSrikara/medicalXanthropic" target="_blank" data-tags="agent">
+      <div class="project-accent violet"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">Second Opinion — Multi-Agent Medical Report Interpreter</h3><span class="project-arrow">↗</span></div>
+          <div style="display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;">
+            <span class="pbadge pbadge-hack">Anthropic × UMD Hackathon 2026</span>
+          </div>
+        </div>
+        <p class="project-desc"><em>"Your report, decoded. Your visit, prepared."</em> — Four parallel Claude specialist agents (Optimist, Skeptic, Systems Thinker, Synthesizer) analyze any uploaded medical report simultaneously. The Optimist finds what is normal and reassuring. The Skeptic flags borderline values — including LDL at 98% of upper limit for a 28-year-old, eGFR 95 flagged as low for under-30, and a TG/HDL ratio of 2.07 suggesting insulin resistance. The Systems Thinker connects findings across the whole picture. The Synthesizer produces a plain-English summary, triage stamp (Reassuring / Watchful / See Doctor Soon), ranked doctor questions, and a medical glossary of 10+ defined terms. Backend uses Claude Code CLI to spawn 4 parallel subprocesses — no API key required. Strict JSON output enforced per agent via role-isolation prompts.</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>4</strong><span>parallel agents</span></div>
+          <div class="metric"><strong>0.973</strong><span>detection probability</span></div>
+          <div class="metric"><strong>3</strong><span>file formats (PDF/DOCX/TXT)</span></div>
+          <div class="metric"><strong>Promise.all()</strong><span>parallel orchestration</span></div>
+          <div class="metric"><strong>10+</strong><span>terms auto-defined</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">Claude API</span><span class="tech-pill">Claude Code CLI</span><span class="tech-pill">React 18</span><span class="tech-pill">Vite</span><span class="tech-pill">Express</span><span class="tech-pill">pdfjs-dist</span><span class="tech-pill">mammoth</span><span class="tech-pill">multi-agent</span><span class="tech-pill">JSON structured output</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/ClutchSrikara/medicalXanthropic ↗</span>
+        <span class="project-type">Hackathon · Health AI · Multi-Agent</span>
+      </div>
+    </a>
+
+    <!-- CAFBRAIN -->
+    <a class="project-card" href="https://github.com/ManasaK285/AI" target="_blank" data-tags="agent ml">
+      <div class="project-accent emerald"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">CAFBRain — AI-Driven Content Generation Platform</h3><span class="project-arrow">↗</span></div>
+          <span class="pbadge pbadge-hack">Hackathon Project</span>
+        </div>
+        <p class="project-desc">AI-driven content generation platform that summarizes multiple documents simultaneously and produces user-specified output formats using LLMs and advanced prompt engineering. Enables rapid content synthesis and automation — designed to eliminate manual document summarization workflows for enterprise users. Built with sophisticated multi-document ingestion, format-aware prompt construction, and automated output structuring.</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>Multi-doc</strong><span>simultaneous ingestion</span></div>
+          <div class="metric"><strong>LLM</strong><span>advanced prompt engineering</span></div>
+          <div class="metric"><strong>Format-aware</strong><span>user-specified outputs</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">LLMs</span><span class="tech-pill">Prompt Engineering</span><span class="tech-pill">Python</span><span class="tech-pill">Document Ingestion</span><span class="tech-pill">Content Automation</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/ManasaK285/AI ↗</span>
+        <span class="project-type">GenAI · Content Automation</span>
+      </div>
+    </a>
+
+    <!-- AGA DATATHON -->
+    <a class="project-card" href="https://github.com/ManasaK285/AI" target="_blank" data-tags="data research">
+      <div class="project-accent amber"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">FEDCrew — Social Impact of Government Programs (AGA Datathon 2026)</h3><span class="project-arrow">↗</span></div>
+          <div style="display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;">
+            <span class="pbadge pbadge-finalist">AGA Datathon Finalist</span>
+          </div>
+        </div>
+        <p class="project-desc">Federal program ROI analysis across SNAP, Social Security, Medicare, and Medicaid using integrated government datasets (2012–2023) from the U.S. Census Bureau ACS, Treasury, and HHS. Built a full data pipeline: ACS API extraction → cleaning → statistical analysis → ROI computation → time-series forecasting with PROPHET. Key findings: Social Security spending shows a strong negative correlation (−0.86) with poverty population. Medicaid drives sustained uninsured population decline with multi-year lagged impact. 75-year projected deficit analysis showing total social insurance deficit doubled from −$40T to −$80T between 2007 and 2024. High Financial Risk / High Social Impact quadrant analysis across all federal programs.</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>−0.86</strong><span>SSA-poverty correlation</span></div>
+          <div class="metric"><strong>2012–2023</strong><span>multi-year dataset</span></div>
+          <div class="metric"><strong>75-year</strong><span>fiscal outlook modeled</span></div>
+          <div class="metric"><strong>ROI</strong><span>computed across 4 programs</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">Python 3.10</span><span class="tech-pill">PROPHET</span><span class="tech-pill">Census API</span><span class="tech-pill">Pandas</span><span class="tech-pill">Statistical Analysis</span><span class="tech-pill">Time-Series Forecasting</span><span class="tech-pill">Tableau</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/ManasaK285/AI ↗</span>
+        <span class="project-type">Data Science · Policy Analytics · AGA Datathon Finalist</span>
+      </div>
+    </a>
+
+    <!-- MEDICAL QA LLM -->
+    <a class="project-card" href="https://github.com/ManasaK285/AI" target="_blank" data-tags="agent ml">
+      <div class="project-accent emerald"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">Medical QA LLM Agent with Automated Evaluation &amp; Retraining</h3><span class="project-arrow">↗</span></div>
+          <span class="pbadge pbadge-research">UMD Course Project</span>
+        </div>
+        <p class="project-desc">Fine-tuned LLaMA 3 via QLoRA (4-bit quantization) for clinical domain adaptation with a full RAG pipeline (LangChain, SBERT, Pinecone, hybrid retrieval). Core innovation: multi-signal anomaly detection monitoring retrieval quality (MRR/precision@k), embedding distribution drift, and LLM inference confidence — two-of-three threshold crossing triggers automated retraining via Vertex AI Pipelines. Calibrated via synthetic perturbation experiments with no labeled failure examples. Caught two genuine distributional shifts standard accuracy metrics missed. Deployed on AWS EC2 with multi-GPU PyTorch and TensorRT optimization.</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>30%</strong><span>retrieval improvement</span></div>
+          <div class="metric"><strong>2</strong><span>distribution shifts caught</span></div>
+          <div class="metric"><strong>2-of-3</strong><span>threshold voting logic</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">LLaMA 3</span><span class="tech-pill">QLoRA 4-bit</span><span class="tech-pill">LangChain</span><span class="tech-pill">SBERT</span><span class="tech-pill">Pinecone</span><span class="tech-pill">ClearML</span><span class="tech-pill">Grafana</span><span class="tech-pill">AWS EC2</span><span class="tech-pill">TensorRT</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/ManasaK285/AI ↗</span>
+        <span class="project-type">Course Project · NLP · LLMOps</span>
+      </div>
+    </a>
+
+    <!-- TRAFFIC PREDICTION -->
+    <a class="project-card" href="https://github.com/ManasaK285/AI" target="_blank" data-tags="ml research">
+      <div class="project-accent amber"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">Multimodal Traffic State Prediction — Weather-Gated Fusion &amp; Scene Graph Attention</h3><span class="project-arrow">↗</span></div>
+          <span class="pbadge pbadge-research">UMD 2026 · MSML640</span>
+        </div>
+        <p class="project-desc">Five-stage multimodal pipeline classifying traffic frames into Free/Moderate/Congested using only a single camera + weather metadata. Primary contributions: WeatherTimeEncoder MLP (6-dim → R⁶⁴, sinusoidal time + one-hot weather), Fusion MLP ([128,64] → R³², BatchNorm + ReLU + Dropout 0.2). Sole contributor to B5 Weather-Gated Attention: learned scalar gate G(wt) = σ(Wgwt + bg) modulating GAT edge attention logits (2,113 params). BDD100K integration (35,651 frames, 4 weather conditions), 3-page Streamlit dashboard, Docker containerisation. 5-variant ablation B1–B5 with per-weather, sigma sensitivity, and latency benchmarking.</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>0.943</strong><span>macro-F1 deployment</span></div>
+          <div class="metric"><strong>173,903</strong><span>frames evaluated</span></div>
+          <div class="metric"><strong>6.67ms</strong><span>per frame latency</span></div>
+          <div class="metric"><strong>+0.391</strong><span>ΔF1 weather encoder</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">PyTorch</span><span class="tech-pill">YOLOv8m</span><span class="tech-pill">GAT</span><span class="tech-pill">BDD100K</span><span class="tech-pill">Streamlit</span><span class="tech-pill">Docker</span><span class="tech-pill">Random Forest</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/ManasaK285/AI ↗</span>
+        <span class="project-type">Multimodal ML · Computer Vision</span>
+      </div>
+    </a>
+
+    <!-- VLA -->
+    <a class="project-card" href="https://github.com/ManasaK285/AI" target="_blank" data-tags="robotics research">
+      <div class="project-accent pink"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">VLA Dataset (CHOP) — Vision-Language-Action Alignment</h3><span class="project-arrow">↗</span></div>
+          <span class="pbadge pbadge-pub">RSS 2026 forthcoming</span>
+        </div>
+        <p class="project-desc">Counterfactual preference labeling pipeline for VLA model alignment in the SCAND robot navigation dataset — analogous to RLHF/DPO preference data design. Designed annotation schema and contrastive trajectory pairs providing preference supervision for downstream robotic policy learning. Built data validation and QA pipelines enforcing consistency across 10,000+ multi-modal trajectory samples (vision, language, action). UMD / Children's Hospital of Philadelphia (CHOP) collaboration. Paper forthcoming at Robotics: Science and Systems 2026 — one of the top peer-reviewed robotics venues worldwide.</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>10K+</strong><span>trajectory pairs annotated</span></div>
+          <div class="metric"><strong>3 modalities</strong><span>vision · language · action</span></div>
+          <div class="metric"><strong>RSS 2026</strong><span>top-tier robotics venue</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">VLA alignment</span><span class="tech-pill">RLHF / DPO</span><span class="tech-pill">SCAND dataset</span><span class="tech-pill">preference labeling</span><span class="tech-pill">UMD / CHOP</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/ManasaK285/AI ↗</span>
+        <span class="project-type">Research · Robotics · RSS 2026</span>
+      </div>
+    </a>
+
+    <!-- SURGICAL ROBOT -->
+    <a class="project-card" href="https://github.com/Manasanjani/surgical_robot_rl" target="_blank" data-tags="robotics">
+      <div class="project-accent emerald"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">RL Surgical Robot — Franka Panda + PyBullet</h3><span class="project-arrow">↗</span></div>
+          <span class="pbadge pbadge-rl">Reinforcement Learning</span>
+        </div>
+        <p class="project-desc">End-to-end RL system for surgical needle path planning with a 7-DOF Franka Panda arm. Full IK via damped least-squares solver (98% success, &lt;0.5mm error). RL formulation from scratch: 3D voxel grid state space, 6-action discrete action space, reward combining sparse goal (+100), hard collision penalty (−100), and a dense shaping term that resolved a degenerate local optimum where the agent learned to satisfy safety constraints by not moving. Systematic Q-Learning vs. DQN comparison. Multi-GPU PyTorch with checkpoint/resume and automated evaluation detecting policy degradation before deployment.</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>98–100%</strong><span>task success rate</span></div>
+          <div class="metric"><strong>0%</strong><span>vessel collision rate</span></div>
+          <div class="metric"><strong>vs 40%</strong><span>straight-line baseline</span></div>
+          <div class="metric"><strong>3,000</strong><span>training episodes</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">PyBullet</span><span class="tech-pill">DQN</span><span class="tech-pill">Q-Learning</span><span class="tech-pill">Franka Panda 7-DOF</span><span class="tech-pill">ROS2</span><span class="tech-pill">MoveIt2</span><span class="tech-pill">PyTorch</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/Manasanjani/surgical_robot_rl ↗</span>
+        <span class="project-type">Robotics · Reinforcement Learning</span>
+      </div>
+    </a>
+
+    <!-- NAV SIM -->
+    <a class="project-card" href="https://github.com/ManasaK285/rob_nav_sim" target="_blank" data-tags="robotics ml">
+      <div class="project-accent sky"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">Autonomous Robot Navigation — CV + Planning + Control</h3><span class="project-arrow">↗</span></div>
+          <span class="pbadge pbadge-research">Robotics</span>
+        </div>
+        <p class="project-desc">Complete sense-plan-act stack built from scratch: synthetic pinhole camera renderer with Gaussian noise and lens blur; 11-stage real-time OpenCV pipeline (Canny, dilation, contour extraction, IoU-based NMS, temporal majority voting); occupancy grid belief map; A* path planner with Euclidean heuristic; PID-controlled differential drive. Three-tier fault-tolerant stuck recovery. Mean localization error 0.10 grid cells. 31-test pytest suite catching 4 critical bugs including a classification ordering error where wall predicate shadowed all specific-shape detections.</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>0.10</strong><span>mean localization error</span></div>
+          <div class="metric"><strong>11 stages</strong><span>real-time CV pipeline</span></div>
+          <div class="metric"><strong>31 tests</strong><span>4 independent suites</span></div>
+          <div class="metric"><strong>4 bugs</strong><span>caught pre-integration</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">OpenCV</span><span class="tech-pill">A* planning</span><span class="tech-pill">PID control</span><span class="tech-pill">occupancy grids</span><span class="tech-pill">pytest</span><span class="tech-pill">Python</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/ManasaK285/rob_nav_sim ↗</span>
+        <span class="project-type">Robotics · Computer Vision · Control</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<div class="full-section alt-section" id="experience">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Experience</h2>
+    </div>
+    <div class="exp-timeline">
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-period">Jun 2025 – Aug 2025</div>
+          <span class="exp-ebadge" style="background:var(--emerald-light);color:var(--emerald);border-color:rgba(16,185,129,0.3);">Internship</span>
+        </div>
+        <div>
+          <div class="exp-role">AI Developer Intern</div>
+          <div class="exp-company">Welspot · Business Health Intelligence · GCP</div>
+          <ul class="exp-points">
+            <li>Architected enterprise RAG pipelines using LangChain and Vertex AI with SBERT embeddings and Pinecone vector indexing; improved contextual retrieval relevance by 30% for domain-specific medical queries.</li>
+            <li>Designed multi-signal anomaly detection (MRR/precision@k, embedding drift, LLM confidence) with two-of-three threshold voting for automated retraining via Vertex AI Pipelines; caught two genuine distributional shifts standard metrics missed.</li>
+            <li>Deployed full observability stack (ClearML, Grafana, BigQuery telemetry); implemented IAM/VPC zero-trust security for sensitive business data workloads.</li>
+          </ul>
+          <div class="exp-tags"><span class="tech-pill">LangChain</span><span class="tech-pill">Vertex AI</span><span class="tech-pill">GCP</span><span class="tech-pill">Pinecone</span><span class="tech-pill">ClearML</span><span class="tech-pill">Docker</span><span class="tech-pill">BigQuery</span></div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-period">Jan 2021 – Aug 2024</div>
+          <span class="exp-ebadge" style="background:var(--violet-light);color:#c4b5fd;border-color:rgba(124,58,237,0.3);">Consulting</span>
+        </div>
+        <div>
+          <div class="exp-role">Consultant — Cloud &amp; AI Developer</div>
+          <div class="exp-company">Deloitte · Fortune 500 Clients · 3.75 years</div>
+          <ul class="exp-points">
+            <li>Deployed Einstein AI, Agentforce, and production LLM agents with tool calling and CRM integrations for Fortune 500 e-commerce clients; achieved 40% reduction in Tier-1 support latency and 25% increase in cross-channel engagement.</li>
+            <li>Built Salesforce Marketing Cloud campaigns end-to-end — HTML/CSS email design, AMPscript and SSJS personalisation, Journey Builder automations, REST/SOAP API triggers, and SQL-based audience segmentation across high-volume data.</li>
+            <li>Implemented Einstein Product Recommendations using collaborative filtering and behavioural ML algorithms; deployed Einstein Predictive Intelligence and Content Selection for personalised content ranking; integrated Interaction Studio (Personalization), Braze, and Marketo via webhooks and triggered campaigns.</li>
+            <li>Built and maintained Salesforce Data Cloud pipelines: data ingestion, modelling, Calculated Insights, segmentation, and activation for unified customer profiles across enterprise systems.</li>
+            <li>Worked on GenAI POCs involving ChatGPT, Google Cloud, and Slack app integrations; data analysis using Tableau, Datorama (Marketing Cloud Intelligence), Power BI, and Einstein Analytics; implemented ETL processes and custom Python data extraction solutions.</li>
+            <li>Engineered AWS Lambda/S3 serverless pipelines; deployed containerized microservices via Docker and Kubernetes; implemented multi-cloud identity governance using Azure Active Directory and AWS IAM zero-trust principles; maintained CI/CD pipelines.</li>
+            <li>Led sprint demos, participated in PI planning, identified and resolved edge cases; facilitated executive GenAI and Agentforce workshops for C-suite stakeholders across multiple Fortune 500 engagements.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="tech-pill">Agentforce</span><span class="tech-pill">Einstein AI</span><span class="tech-pill">Apex</span><span class="tech-pill">SFMC</span><span class="tech-pill">AMPscript</span><span class="tech-pill">SSJS</span><span class="tech-pill">Data Cloud</span><span class="tech-pill">AWS</span><span class="tech-pill">Docker</span><span class="tech-pill">Kubernetes</span><span class="tech-pill">Braze</span><span class="tech-pill">Marketo</span><span class="tech-pill">Tableau</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-period">Fall 2025 / Spring 2026</div>
+          <span class="exp-ebadge" style="background:var(--amber-light);color:var(--amber);border-color:rgba(245,158,11,0.3);">Teaching</span>
+        </div>
+        <div>
+          <div class="exp-role">Graduate Teaching Assistant</div>
+          <div class="exp-company">University of Maryland · Dept. of Computer Science</div>
+          <ul class="exp-points">
+            <li>TA for Data Structures &amp; Algorithms for Machine Learning (Spring 2026) — algorithm design, complexity analysis, ML-specific data structures for 50+ graduate students.</li>
+            <li>TA for Cloud Computing (Fall 2025) — managed labs covering distributed systems, cloud architecture, and containerization.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-period">May 2018 – Jun 2018</div>
+          <span class="exp-ebadge" style="background:var(--sky-light);color:var(--sky);border-color:rgba(14,165,233,0.3);">Internship</span>
+        </div>
+        <div>
+          <div class="exp-role">Engineering Intern</div>
+          <div class="exp-company">BHEL (Bharat Heavy Electricals Limited) · Hyderabad</div>
+          <ul class="exp-points">
+            <li>Understood SCADA system components and virtualized environments for industrial monitoring of turbine systems.</li>
+            <li>Studied MATLAB and Multisim implementations for simulating electrical circuits and control logic for turbine generators; worked alongside engineering team on turbo-generator assembly.</li>
+          </ul>
+          <div class="exp-tags"><span class="tech-pill">SCADA</span><span class="tech-pill">MATLAB</span><span class="tech-pill">Multisim</span><span class="tech-pill">Control Systems</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- EDUCATION -->
+<section class="section" id="education">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Education</h2>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card primary">
+      <div class="edu-school">University of Maryland, College Park</div>
+      <div class="edu-degree">MS in Applied Machine Learning</div>
+      <div class="edu-meta">Expected May 2026</div>
+      <div class="edu-gpa">GPA: 4.0 / 4.0</div>
+      <div class="edu-courses">Deep Learning · NLP · Reinforcement Learning · Computer Vision · Multimodal ML · Distributed Systems · Optimization · Information Retrieval</div>
+    </div>
+    <div class="edu-card secondary">
+      <div class="edu-school">G. Narayanamma Institute of Technology &amp; Science</div>
+      <div class="edu-degree">B.Tech in Electrical &amp; Electronics Engineering</div>
+      <div class="edu-meta">Graduated 2020</div>
+      <div class="edu-gpa">GPA: 8.32 / 10</div>
+      <div class="edu-courses">Data Structures · C++ · Control Systems · Signal Processing · Embedded Systems · PLC Programming · Motors &amp; Drives · Fusion 360 CAD · MATLAB · LABVIEW · Verilog/VHDL</div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<div class="full-section alt-section" id="certifications">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Certifications</h2>
+    </div>
+    <div class="cert-hero">
+      <div class="cert-num">16x</div>
+      <div>
+        <div class="cert-text-label">Salesforce Certified</div>
+        <div class="cert-text-sub">Agentforce Specialist · Platform Developer I · Marketing Cloud (full suite) · Data Cloud · AI Associate · Heroku Developer</div>
+      </div>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card"><div class="cert-dot amber"></div>Agentforce Specialist (Jan 2026)</div>
+      <div class="cert-card"><div class="cert-dot violet"></div>Platform Developer I (2024)</div>
+      <div class="cert-card"><div class="cert-dot violet"></div>Salesforce Admin (2024)</div>
+      <div class="cert-card"><div class="cert-dot violet"></div>AI Associate (2024)</div>
+      <div class="cert-card"><div class="cert-dot violet"></div>Marketing Cloud Developer (2022)</div>
+      <div class="cert-card"><div class="cert-dot violet"></div>Marketing Cloud Consultant (2022)</div>
+      <div class="cert-card"><div class="cert-dot violet"></div>Marketing Cloud Admin (2022)</div>
+      <div class="cert-card"><div class="cert-dot violet"></div>MC Email Specialist (2021)</div>
+      <div class="cert-card"><div class="cert-dot violet"></div>Data Cloud Consultant</div>
+      <div class="cert-card"><div class="cert-dot violet"></div>MC Advanced Cross Channel (2023)</div>
+      <div class="cert-card"><div class="cert-dot violet"></div>MC Intelligence / Datorama (2021)</div>
+      <div class="cert-card"><div class="cert-dot violet"></div>MC Personalization</div>
+      <div class="cert-card"><div class="cert-dot violet"></div>Account Engagement Specialist (2023)</div>
+      <div class="cert-card"><div class="cert-dot violet"></div>Account Engagement Consultant</div>
+      <div class="cert-card"><div class="cert-dot violet"></div>Heroku Developer</div>
+      <div class="cert-card"><div class="cert-dot violet"></div>Platform App Builder</div>
+      <div class="cert-card"><div class="cert-dot emerald"></div>GCP Professional Data Engineer</div>
+      <div class="cert-card"><div class="cert-dot emerald"></div>Adobe Analytics Developer (2024)</div>
+      <div class="cert-card"><div class="cert-dot emerald"></div>Google Analytics (2024)</div>
+      <div class="cert-card"><div class="cert-dot pink"></div>Braze Marketer (2023)</div>
+      <div class="cert-card"><div class="cert-dot pink"></div>IBM Quantum Achievement (2024)</div>
+      <div class="cert-card"><div class="cert-dot amber"></div>Consumer Industry Program — Bronze (Deloitte, 2023)</div>
+    </div>
+    <div class="tb-bar">
+      <div class="tb-item"><strong>🏆</strong>Agentblazer Champion 2026</div>
+      <div class="tb-item"><strong>383</strong>Trailhead Badges</div>
+      <div class="tb-item"><strong>13</strong>Superbadges</div>
+      <div class="tb-item" style="font-size:11px;color:var(--faint);">Prompt Builder Templates · Process Automation · Screen Flow</div>
+    </div>
+  </div>
+</div>
+
+<!-- AWARDS -->
+<section class="section" id="awards">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Awards &amp; Recognition</h2>
+  </div>
+  <div class="awards-grid">
+    <div class="award-card">
+      <div class="award-icon gold">🏆</div>
+      <div>
+        <div class="award-title">AGA Datathon 2026 — Finalist</div>
+        <div class="award-sub">Federal program ROI analysis · FEDCrew team</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon violet">🥇</div>
+      <div>
+        <div class="award-title">Winner — Martech Quizathon 2023</div>
+        <div class="award-sub">SFMC, Salesforce CDP, Pardot, Braze</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon gold">👏</div>
+      <div>
+        <div class="award-title">Deloitte Applause Award × 2</div>
+        <div class="award-sub">2023 and 2024 — outstanding client delivery</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon emerald">⭐</div>
+      <div>
+        <div class="award-title">Deloitte Spot Award × 2</div>
+        <div class="award-sub">2021 and 2022 — exceptional performance</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon violet">🔬</div>
+      <div>
+        <div class="award-title">IBM Quantum Achievement Award 2024</div>
+        <div class="award-sub">Quantum information science contribution</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon gold">🥈</div>
+      <div>
+        <div class="award-title">Second Prize — Paper Presentation 2018</div>
+        <div class="award-sub">Maglev Solar Wind Turbine · JNTUH Pragya 2k18</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon violet">🥇</div>
+      <div>
+        <div class="award-title">First Prize — C Skill Test 2017</div>
+        <div class="award-sub">Cybersuds (CSE), GNITS</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon emerald">🎖</div>
+      <div>
+        <div class="award-title">High Commendation — MUN</div>
+        <div class="award-sub">Literaria Clava, GNITS</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon amber">🏓</div>
+      <div>
+        <div class="award-title">Table Tennis — Winner (Doubles)</div>
+        <div class="award-sub">Nagole Institute of Technology 2019</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon pink">📰</div>
+      <div>
+        <div class="award-title">ET Campus Stars 2.0 — Top 3 Rounds</div>
+        <div class="award-sub">National competition by Economic Times 2018–19</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div>
+      <div class="contact-eyebrow">Get in touch</div>
+      <h2 class="contact-headline">Let's build something <em>real</em>.</h2>
+      <p class="contact-sub">Open to full-time roles in AI/ML engineering, applied science, and Salesforce/Agentforce consulting. Authorized to work in the US on OPT. Available immediately after May 2026 graduation. Open to relocation anywhere in the US.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:manasa.kondapi@gmail.com" class="contact-link">
+        <div class="contact-link-icon">✉</div>
+        <div><span class="contact-link-label">email</span><span class="contact-link-value">manasa.kondapi@gmail.com</span></div>
+      </a>
+      <a href="tel:+12403054455" class="contact-link">
+        <div class="contact-link-icon">#</div>
+        <div><span class="contact-link-label">phone</span><span class="contact-link-value">+1 (240) 305-4455</span></div>
+      </a>
+      <a href="https://linkedin.com/in/manasanjani-kondapi-92179b18" target="_blank" class="contact-link">
+        <div class="contact-link-icon">in</div>
+        <div><span class="contact-link-label">linkedin</span><span class="contact-link-value">manasanjani-kondapi-92179b18</span></div>
+      </a>
+      <a href="https://github.com/ManasaK285/AI" target="_blank" class="contact-link">
+        <div class="contact-link-icon">gh</div>
+        <div><span class="contact-link-label">github</span><span class="contact-link-value">ManasaK285 / Manasanjani</span></div>
+      </a>
+      <a href="https://salesforce.com/trailblazer/kmanasa369" target="_blank" class="contact-link">
+        <div class="contact-link-icon">sf</div>
+        <div><span class="contact-link-label">trailblazer</span><span class="contact-link-value">kmanasa369 · Agentblazer Champion 2026</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Manasanjani Kondapi</span>
+  <span>MS Applied Machine Learning · University of Maryland · 2026</span>
+</footer>
+
+<script>
+function filterProjects(tag, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.project-card').forEach(card => {
+    if (tag === 'all') { card.classList.remove('hidden'); return; }
+    const tags = card.dataset.tags || '';
+    tags.includes(tag) ? card.classList.remove('hidden') : card.classList.add('hidden');
+  });
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.project-card, .exp-item, .cert-card, .award-card, .edu-card').forEach(el => {
+  el.style.opacity = '0'; el.style.transform = 'translateY(16px)';
+  el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>
