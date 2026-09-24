@@ -291,7 +291,7 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
       <div class="hero-eyebrow">ML Engineer &amp; AI Researcher</div>
       <h1 class="hero-name">Manasanjani<br><em>Kondapi</em></h1>
       <p class="hero-subtitle">Building AI systems that work in the real world.</p>
-      <p class="hero-bio">MS in Applied Machine Learning, <strong>University of Maryland</strong> (GPA 4.0, May 2026). Four years at <strong>Deloitte</strong> and <strong>Welspot</strong> deploying production AI agents, RAG pipelines, and multimodal ML systems for Fortune 500 clients. <strong>Agentblazer Champion 2026</strong>, 16x Salesforce Certified. Research forthcoming at <strong>RSS 2026</strong>. AGA Datathon <strong>Finalist 2026</strong>.</p>
+      <p class="hero-bio">MS in Applied Machine Learning, <strong>University of Maryland</strong> (GPA 4.0, May 2026). Four years at <strong>Deloitte</strong> and <strong>Welspot</strong> deploying production AI agents, RAG pipelines, and multimodal ML systems for Fortune 500 clients. <strong>Winner — Anthropic × UMD Hackathon 2026</strong>. <strong>Agentblazer Champion 2026</strong>, 16x Salesforce Certified. First-author at <strong>RSS 2026</strong> (arXiv:2603.02004). AGA Datathon <strong>Finalist 2026</strong>.</p>
       <div class="hero-tags">
         <span class="tag tag-violet">LLMs &amp; Agents</span>
         <span class="tag tag-emerald">Multimodal ML</span>
@@ -315,11 +315,12 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
         <div class="hcard-stat"><span class="hcard-stat-label">Experience</span><span class="hcard-stat-val">4+ years</span></div>
         <div class="hcard-stat"><span class="hcard-stat-label">Salesforce certs</span><span class="hcard-stat-val">16x + Agentblazer</span></div>
         <div class="hcard-stat"><span class="hcard-stat-label">Trailhead badges</span><span class="hcard-stat-val">383 · 13 Superbadges</span></div>
-        <div class="hcard-stat"><span class="hcard-stat-label">Availability</span><span class="hcard-stat-val">May 2026 · OPT</span></div>
+        <div class="hcard-stat"><span class="hcard-stat-label">Availability</span><span class="hcard-stat-val">Immediate · F-1 OPT Active</span></div>
         <div class="hcard-stat"><span class="hcard-stat-label">Phone</span><span class="hcard-stat-val">+1 (240) 305-4455</span></div>
       </div>
       <div class="hcard-badges">
-        <div class="hcard-badge pub">RSS 2026 — forthcoming publication</div>
+        <div class="hcard-badge pub">🏆 Anthropic × UMD Hackathon 2026 — Winner</div>
+        <div class="hcard-badge pub">RSS 2026 — Published · arXiv:2603.02004</div>
         <div class="hcard-badge pub">AGA Datathon 2026 — Finalist</div>
         <div class="hcard-badge sf">Agentblazer Champion 2026</div>
         <div class="hcard-badge gpa">GPA 4.0 — MS Applied ML, UMD</div>
@@ -354,9 +355,64 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
     <button class="filter-btn" onclick="filterProjects('robotics', this)">Robotics</button>
     <button class="filter-btn" onclick="filterProjects('research', this)">Research</button>
     <button class="filter-btn" onclick="filterProjects('data', this)">Data / Analytics</button>
+    <button class="filter-btn" onclick="filterProjects('self-directed', this)">Self-Directed</button>
   </div>
 
   <div class="projects-list" id="projects-list">
+
+    <!-- DREAM-RSI -->
+    <a class="project-card" href="https://github.com/ManasaK285/G2" target="_blank" data-tags="research self-directed agent">
+      <div class="project-accent sky"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">Dream-RSI — Recursive Self-Improvement via Replay Simulation</h3><span class="project-arrow">↗</span></div>
+          <div style="display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;">
+            <span class="pbadge pbadge-research">Self-Directed Research</span>
+          </div>
+        </div>
+        <p class="project-desc">End-to-end implementation of the Dream-RSI framework (arXiv:2609.14858) — a recursive self-improvement system for automated code discovery. Built the full Discover-Evaluate-Store-Dream-Compare loop: Top-K candidate generation, correctness and runtime benchmarking, discovery trees with parent/child relationships stored in SQLite, three exploration policies (Greedy, Diverse, Adaptive), and offline dreaming that replays historical discovery trees under alternative policies without re-executing expensive computations. Recursive cycles switch the active policy based on replay reward signals. Parent-to-child delta tracking identifies genuinely productive search directions. Next milestone: formal three-term replay objective (quality minus cost penalty plus parallelism bonus) and replacing the deterministic coding agent with an LLM for autonomous implementation generation.</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>5</strong><span>loop stages</span></div>
+          <div class="metric"><strong>3</strong><span>exploration policies</span></div>
+          <div class="metric"><strong>SQLite</strong><span>persistent discovery trees</span></div>
+          <div class="metric"><strong>Offline</strong><span>policy evaluation via dreaming</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">Python</span><span class="tech-pill">SQLite</span><span class="tech-pill">FastAPI</span><span class="tech-pill">Streamlit</span><span class="tech-pill">Docker</span><span class="tech-pill">LLM Agent</span><span class="tech-pill">Recursive AI</span><span class="tech-pill">Policy Optimization</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/ManasaK285/G2 · Private ↗</span>
+        <span class="project-type">Self-Directed Research · arXiv:2609.14858</span>
+      </div>
+    </a>
+
+    <!-- GROUNDEDMIND -->
+    <a class="project-card" href="https://github.com/ManasaK285/G2" target="_blank" data-tags="research self-directed ml">
+      <div class="project-accent violet"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">GroundedMind — Empirical Embodied Cognition Research</h3><span class="project-arrow">↗</span></div>
+          <div style="display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;">
+            <span class="pbadge pbadge-research">Self-Directed Research</span>
+          </div>
+        </div>
+        <p class="project-desc">Empirical test of embodied cognition theory: does grounding language models in synthetic sensory experience improve concept representation, especially for novel/pseudoword concepts with no prior linguistic associations? Built a text-only baseline using SentenceTransformer embeddings with cosine similarity and softmax association distributions, a synthetic sensory world generator creating controlled multisensory experiences across eight attributes (color, texture, temperature, sound, movement, size, shape, emotion), and an MLP-based grounded model with multimodal fusion and InfoNCE contrastive learning. Rigorous statistical evaluation pipeline: permutation testing, Representational Similarity Analysis (RSA), Jensen-Shannon divergence, bootstrap confidence intervals, Pearson/Spearman correlation. Result: grounded model achieves 73.5% vs 57.2% text-only accuracy on novel concept association (p=0.0028).</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>73.5%</strong><span>grounded accuracy</span></div>
+          <div class="metric"><strong>57.2%</strong><span>text-only baseline</span></div>
+          <div class="metric"><strong>p=0.0028</strong><span>permutation test</span></div>
+          <div class="metric"><strong>8</strong><span>sensory attributes</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">PyTorch</span><span class="tech-pill">SentenceTransformers</span><span class="tech-pill">InfoNCE</span><span class="tech-pill">RSA</span><span class="tech-pill">Permutation Testing</span><span class="tech-pill">Jensen-Shannon</span><span class="tech-pill">Bootstrap CI</span><span class="tech-pill">Multimodal Fusion</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/ManasaK285/G2 · Private ↗</span>
+        <span class="project-type">Self-Directed Research · Embodied Cognition</span>
+      </div>
+    </a>
 
     <!-- SECOND OPINION -->
     <a class="project-card" href="https://github.com/ClutchSrikara/medicalXanthropic" target="_blank" data-tags="agent">
@@ -492,7 +548,7 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
       <div class="project-card-inner">
         <div class="project-top">
           <div class="project-title-row"><h3 class="project-title">VLA Dataset (CHOP) — Vision-Language-Action Alignment</h3><span class="project-arrow">↗</span></div>
-          <span class="pbadge pbadge-pub">RSS 2026 forthcoming</span>
+          <span class="pbadge pbadge-pub">RSS 2026 Published · arXiv:2603.02004</span>
         </div>
         <p class="project-desc">Counterfactual preference labeling pipeline for VLA model alignment in the SCAND robot navigation dataset — analogous to RLHF/DPO preference data design. Designed annotation schema and contrastive trajectory pairs providing preference supervision for downstream robotic policy learning. Built data validation and QA pipelines enforcing consistency across 10,000+ multi-modal trajectory samples (vision, language, action). UMD / Children's Hospital of Philadelphia (CHOP) collaboration. Paper forthcoming at Robotics: Science and Systems 2026 — one of the top peer-reviewed robotics venues worldwide.</p>
         <div class="project-metrics">
@@ -659,6 +715,23 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
 
       <div class="exp-item">
         <div>
+          <div class="exp-period">Sep 2026 – Present</div>
+          <span class="exp-ebadge" style="background:var(--violet-light);color:#c4b5fd;border-color:rgba(124,58,237,0.3);">AI Engineer</span>
+        </div>
+        <div>
+          <div class="exp-role">AI Engineer</div>
+          <div class="exp-company">JakeyMac Foundation · Nonprofit · Remote</div>
+          <ul class="exp-points">
+            <li>Building AI-driven fundraising automation engine using LangGraph multi-agent orchestration, Claude API, and n8n workflow automation — designing donor intelligence pipelines, RAG-based prospect scoring, and personalized outreach generation at scale.</li>
+            <li>Architecting end-to-end automation across four fundraising channels (crowdfunding, corporate sponsors, DAFs, real estate donations) with GoHighLevel CRM integration, Chariot DAF platform, Twilio, and Stripe.</li>
+            <li>Implementing LLM personalization pipelines for donor segmentation and automated corporate sponsor outreach with predictive LTV modeling.</li>
+          </ul>
+          <div class="exp-tags"><span class="tech-pill">LangGraph</span><span class="tech-pill">Claude API</span><span class="tech-pill">n8n</span><span class="tech-pill">GoHighLevel</span><span class="tech-pill">Chariot</span><span class="tech-pill">RAG</span><span class="tech-pill">Twilio</span></div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
           <div class="exp-period">Jun 2025 – Aug 2025</div>
           <span class="exp-ebadge" style="background:var(--emerald-light);color:var(--emerald);border-color:rgba(16,185,129,0.3);">Internship</span>
         </div>
@@ -742,7 +815,7 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
     <div class="edu-card primary">
       <div class="edu-school">University of Maryland, College Park</div>
       <div class="edu-degree">MS in Applied Machine Learning</div>
-      <div class="edu-meta">Expected May 2026</div>
+      <div class="edu-meta">Graduated May 2026</div>
       <div class="edu-gpa">GPA: 4.0 / 4.0</div>
       <div class="edu-courses">Deep Learning · NLP · Reinforcement Learning · Computer Vision · Multimodal ML · Distributed Systems · Optimization · Information Retrieval</div>
     </div>
@@ -810,6 +883,13 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
     <h2 class="section-title">Awards &amp; Recognition</h2>
   </div>
   <div class="awards-grid">
+    <div class="award-card">
+      <div class="award-icon gold">🏆</div>
+      <div>
+        <div class="award-title">Anthropic × UMD Hackathon 2026 — Winner</div>
+        <div class="award-sub">Health &amp; Wellbeing Track · Second Opinion multi-agent system</div>
+      </div>
+    </div>
     <div class="award-card">
       <div class="award-icon gold">🏆</div>
       <div>
@@ -889,7 +969,7 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
     <div>
       <div class="contact-eyebrow">Get in touch</div>
       <h2 class="contact-headline">Let's build something <em>real</em>.</h2>
-      <p class="contact-sub">Open to full-time roles in AI/ML engineering, applied science, and Salesforce/Agentforce consulting. Authorized to work in the US on OPT. Available immediately after May 2026 graduation. Open to relocation anywhere in the US.</p>
+      <p class="contact-sub">Open to full-time roles in AI/ML engineering, applied science, and Salesforce/Agentforce consulting. MS graduate (May 2026), authorized to work in the US on F-1 OPT, available immediately. Open to relocation anywhere in the US.</p>
     </div>
     <div class="contact-links">
       <a href="mailto:manasa.kondapi@gmail.com" class="contact-link">
