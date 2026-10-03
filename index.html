@@ -386,7 +386,207 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
         <span class="project-type">Self-Directed Research · arXiv:2609.14858</span>
       </div>
     </a>
+<!-- SOP COMPLIANCE MIRROR -->
+    <a class="project-card" href="https://github.com/ManasaK285/G2" target="_blank" data-tags="agent research self-directed">
+      <div class="project-accent violet"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">SOP Compliance Mirror — Dual-Agent Compliance Enforcement Runtime</h3><span class="project-arrow">↗</span></div>
+          <div style="display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;">
+            <span class="pbadge pbadge-prod">Production</span>
+          </div>
+        </div>
+        <p class="project-desc">Production-grade SOP-guided conversational agent with dual-agent compliance auditing for insurance claims. Every response goes through two Claude instances: the Responder generates following a 4-phase SOP (VERIFY_ID, RESOLVE_INTENT, PROCESS_CASE, POST_PROCESS), and the Compliance Auditor scores it on SOP grounding, hallucination risk, and escalation necessity before delivery. 14-step processing pipeline including 3-PII identity gate, cross-phase memory, persona adaptation, prompt injection detection, drift tracking, SOP Gap Detector, and a Living SOP Editor. Shipped in 48 hours using Claude Code as the primary development tool.</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>14</strong><span>pipeline steps</span></div>
+          <div class="metric"><strong>26</strong><span>unit tests passing</span></div>
+          <div class="metric"><strong>25</strong><span>golden eval cases</span></div>
+          <div class="metric"><strong>48hrs</strong><span>ship time</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">Claude API</span><span class="tech-pill">FastAPI</span><span class="tech-pill">Streamlit</span><span class="tech-pill">SQLite</span><span class="tech-pill">Docker</span><span class="tech-pill">Python</span><span class="tech-pill">Pydantic</span><span class="tech-pill">Dual-Agent</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/ManasaK285/G2 ↗</span>
+        <span class="project-type">Agentic AI · Compliance · Production</span>
+      </div>
+    </a>
 
+    <!-- AGENTFORGE -->
+    <a class="project-card" href="https://github.com/ManasaK285/G2" target="_blank" data-tags="agent research self-directed">
+      <div class="project-accent emerald"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">AgentForge — Multi-Agent Coding Harness with Meta-Debugger</h3><span class="project-arrow">↗</span></div>
+          <span class="pbadge pbadge-research">Self-Directed Research</span>
+        </div>
+        <p class="project-desc">Agentic coding harness that diagnoses and improves the workflow when an agent fails, rather than blindly retrying code generation. Planner analyzes the task and creates a structured spec. Repository Analyst inspects the codebase. Three parallel Coder strategies run simultaneously (minimal, robust, test_first) in isolated workspaces. Judge verifies each trajectory. Failures are classified via a taxonomy and routed to the Meta-Debugger, which intervenes on the workflow — not just the code — then retries. Demonstrated failure → intervention → recovery cycle: Attempt 1 (minimal PASS, robust FAIL, test_first PASS) → Meta-Debugger diagnoses root cause → Attempt 2 (all three PASS). SQLite-backed run IDs, trajectory traces, events, and results. FastAPI backend, Streamlit dashboard.</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>3</strong><span>parallel strategies</span></div>
+          <div class="metric"><strong>Meta-Debugger</strong><span>workflow-level diagnosis</span></div>
+          <div class="metric"><strong>SQLite</strong><span>trajectory persistence</span></div>
+          <div class="metric"><strong>Proven</strong><span>failure→recovery cycle</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">Python</span><span class="tech-pill">FastAPI</span><span class="tech-pill">Streamlit</span><span class="tech-pill">SQLite</span><span class="tech-pill">Multi-Agent</span><span class="tech-pill">Failure Taxonomy</span><span class="tech-pill">LLM Agent</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/ManasaK285/G2 ↗</span>
+        <span class="project-type">Agentic AI · Coding Agent · Meta-Debugging</span>
+      </div>
+    </a>
+
+    <!-- RECFORGE -->
+    <a class="project-card" href="https://github.com/ManasaK285/G2" target="_blank" data-tags="ml research self-directed data">
+      <div class="project-accent amber"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">RecForge — GenRec-Inspired Recommendation Ranking System</h3><span class="project-arrow">↗</span></div>
+          <span class="pbadge pbadge-research">Self-Directed Research</span>
+        </div>
+        <p class="project-desc">End-to-end recommendation system inspired by GenRec (arXiv:2608.10257, Netflix) exploring the transition from feature engineering to context engineering. Multi-strategy candidate generation (popularity, collaborative, semantic TF-IDF). Context Engine compresses full interaction history into compact textual representations encoding recency, genre signals, and behavioral patterns (~449 chars from 100+ interactions). Multi-objective Reward Engine combining engagement, satisfaction, discovery, diversity, and novelty signals. Catalog-aware neural ranker trained on 61,309 examples with sampled negatives. Full ranking evaluation: HitRate@10=0.0230, MRR@10=0.0078, NDCG@10=0.0114, Diversity@10=0.8435. 182ms average latency, ~15s full build time. MovieLens dataset. FastAPI, Docker.</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>0.8435</strong><span>Diversity@10</span></div>
+          <div class="metric"><strong>61K</strong><span>training examples</span></div>
+          <div class="metric"><strong>182ms</strong><span>avg latency</span></div>
+          <div class="metric"><strong>3</strong><span>retrieval strategies</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">PyTorch</span><span class="tech-pill">Python</span><span class="tech-pill">FastAPI</span><span class="tech-pill">Docker</span><span class="tech-pill">MovieLens</span><span class="tech-pill">TF-IDF</span><span class="tech-pill">Context Engineering</span><span class="tech-pill">Neural Ranker</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/ManasaK285/G2 ↗</span>
+        <span class="project-type">RecSys · Context Engineering · GenRec · arXiv:2608.10257</span>
+      </div>
+    </a>
+
+    <!-- TASKRELREC -->
+    <a class="project-card" href="https://github.com/ManasaK285/G2" target="_blank" data-tags="ml research self-directed">
+      <div class="project-accent sky"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">TaskRelRec V3 — Relationship-Aware Multi-Task Recommendation</h3><span class="project-arrow">↗</span></div>
+          <span class="pbadge pbadge-research">Self-Directed Research</span>
+        </div>
+        <p class="project-desc">Multi-task recommendation system that explicitly learns relationships between four user behavior objectives (likes, strong preference, repeat interest, high engagement) rather than treating them as independent tasks. Implements and compares Shared-Bottom, MMoE, and the proposed TaskRelRec architecture with learned task-relationship matrices. Empirical and learned relationship matrices generated. Full candidate ranking evaluation with proper positive and negative sampling: HitRate@10, Recall@10, NDCG@10, MRR@10. TaskRelRec showed strongest ranking on Strong Preference (HitRate@10=16.67%) and Repeat Interest (HitRate@10=12.00%). Demonstrates that explicit task relationships produce useful ranking behavior for selected objectives while revealing limits of the current relation-loss formulation on pointwise AUC.</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>16.67%</strong><span>HitRate@10 (Strong Pref)</span></div>
+          <div class="metric"><strong>4</strong><span>behavioral objectives</span></div>
+          <div class="metric"><strong>3</strong><span>architectures compared</span></div>
+          <div class="metric"><strong>Learned</strong><span>task-relationship matrices</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">PyTorch</span><span class="tech-pill">Multi-Task Learning</span><span class="tech-pill">MMoE</span><span class="tech-pill">Shared-Bottom</span><span class="tech-pill">NDCG@10</span><span class="tech-pill">MRR@10</span><span class="tech-pill">Python</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/ManasaK285/G2 ↗</span>
+        <span class="project-type">RecSys · Multi-Task Learning · Ranking</span>
+      </div>
+    </a>
+
+    <!-- POLCA-LAB -->
+    <a class="project-card" href="https://github.com/ManasaK285/G2" target="_blank" data-tags="agent research self-directed">
+      <div class="project-accent pink"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">POLCA-Lab — LLM System Optimization Loop</h3><span class="project-arrow">↗</span></div>
+          <span class="pbadge pbadge-research">Self-Directed Research</span>
+        </div>
+        <p class="project-desc">End-to-end optimization framework for LLM systems applying the POLCA loop across prompt, RAG, and agent configurations. Core loop: candidate generation → priority selection (balancing exploitation, diversity, uncertainty) → stochastic multi-seed evaluation → reward and feedback → LLM-guided proposal → ε-Net diversity filter → candidate memory → historical summarization. Prevents mode collapse via the ε-Net diversity filter ensuring candidates remain sufficiently separated in configuration space. 6-baseline comparison under equal evaluation budgets: Full POLCA vs Random Search vs Hill Climbing vs UCB vs No-ε-Net ablation vs No-Summary ablation. FastAPI, Streamlit, Docker.</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>6</strong><span>baselines compared</span></div>
+          <div class="metric"><strong>ε-Net</strong><span>diversity filter</span></div>
+          <div class="metric"><strong>Multi-seed</strong><span>stochastic evaluation</span></div>
+          <div class="metric"><strong>3</strong><span>optimization axes</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">Python</span><span class="tech-pill">FastAPI</span><span class="tech-pill">Streamlit</span><span class="tech-pill">Docker</span><span class="tech-pill">LLM</span><span class="tech-pill">ε-Net Diversity</span><span class="tech-pill">RAG Optimization</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/ManasaK285/G2 ↗</span>
+        <span class="project-type">LLM Optimization · Agent Systems · Research</span>
+      </div>
+    </a>
+
+    <!-- SWARMGUARD V2 -->
+    <a class="project-card" href="https://github.com/ManasaK285/G2" target="_blank" data-tags="research self-directed agent">
+      <div class="project-accent emerald"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">SwarmGuard v2 — Multi-Agent Security Research</h3><span class="project-arrow">↗</span></div>
+          <span class="pbadge pbadge-research">Self-Directed Research</span>
+        </div>
+        <p class="project-desc">Controlled research simulation studying exploit propagation and governance in multi-agent systems. 12 agents with heterogeneous attributes interact across two evaluator environments (vulnerable and strict). Agents can discover a shortcut exploit, share it via a knowledge base, and adopt it. Four governance policies evaluated: baseline (no governance), peer auditing, audit plus quarantine, audit plus quarantine plus recovery. 800 total runs (2 evaluators × 4 governance policies × 100 seeds) to isolate genuine effects from stochastic noise. Key finding: auditing alone detects but does not contain spread; quarantine reduces exposure at availability cost; recovery substantially restores availability without sacrificing containment. Full statistical evaluation (mean + SD). CSV/JSON artifact generation.</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>800</strong><span>controlled runs</span></div>
+          <div class="metric"><strong>4</strong><span>governance policies</span></div>
+          <div class="metric"><strong>100</strong><span>seeds per condition</span></div>
+          <div class="metric"><strong>12</strong><span>heterogeneous agents</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">Python</span><span class="tech-pill">Multi-Agent</span><span class="tech-pill">Statistical Evaluation</span><span class="tech-pill">Governance</span><span class="tech-pill">Security</span><span class="tech-pill">Simulation</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/ManasaK285/G2 ↗</span>
+        <span class="project-type">AI Safety · Multi-Agent Security · Research</span>
+      </div>
+    </a>
+
+    <!-- REASONLENS -->
+    <a class="project-card" href="https://github.com/ManasaK285/G2" target="_blank" data-tags="research self-directed ml">
+      <div class="project-accent violet"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">ReasonLens — Privacy Permission Research Platform</h3><span class="project-arrow">↗</span></div>
+          <span class="pbadge pbadge-research">Self-Directed Research</span>
+        </div>
+        <p class="project-desc">Full-stack research platform extending Berke et al. (PoPETs 2027) studying how permission explanations affect user privacy decisions in mobile apps. Kotlin/Compose Android app with deterministic condition assignment via SHA-256 user ID hashing ensuring balanced experiment arms. FastAPI backend with SQLite/PostgreSQL persistence and Pydantic validation. Logistic regression + TF-IDF ML pipeline classifying permission grant behavior from explanation text features. Streamlit analytics dashboard. 2,000-participant simulation with four explanation conditions. Complete IRB-ready experimental design with consent flows, data minimization, and audit logging.</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>2,000</strong><span>participant simulation</span></div>
+          <div class="metric"><strong>SHA-256</strong><span>deterministic assignment</span></div>
+          <div class="metric"><strong>4</strong><span>experimental conditions</span></div>
+          <div class="metric"><strong>Full-stack</strong><span>Android + API + ML + Dashboard</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">Kotlin/Compose</span><span class="tech-pill">FastAPI</span><span class="tech-pill">SQLite</span><span class="tech-pill">PostgreSQL</span><span class="tech-pill">TF-IDF</span><span class="tech-pill">Logistic Regression</span><span class="tech-pill">Streamlit</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/ManasaK285/G2 ↗</span>
+        <span class="project-type">Privacy Research · Mobile · ML · PoPETs 2027</span>
+      </div>
+    </a>
+
+    <!-- TRUSTLENS -->
+    <a class="project-card" href="https://github.com/ManasaK285/G2" target="_blank" data-tags="research self-directed ml">
+      <div class="project-accent amber"></div>
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div class="project-title-row"><h3 class="project-title">TrustLens — AI Detection Generalization Research</h3><span class="project-arrow">↗</span></div>
+          <span class="pbadge pbadge-research">Self-Directed Research</span>
+        </div>
+        <p class="project-desc">Controlled study on AI text detection generalization showing that random train/test accuracy is insufficient for evaluating AI detection reliability. Generated a 2,400-response dataset across 7 scenarios with balanced human/AI sources and multiple style templates. TF-IDF + Logistic Regression classifier. Standard random split: 93.8% accuracy. Style-template holdout evaluation (training on some templates, testing on others): 82.67% — range 63.15% to 98.92% across splits, showing the model has learned style artifacts rather than true AI/human signal. Sanity check with randomized labels: 50.8%, confirming the pipeline is valid. Demonstrates why evaluation methodology matters more than headline accuracy numbers.</p>
+        <div class="project-metrics">
+          <div class="metric"><strong>93.8%</strong><span>standard accuracy</span></div>
+          <div class="metric"><strong>82.67%</strong><span>style-template holdout</span></div>
+          <div class="metric"><strong>50.8%</strong><span>randomized-label sanity</span></div>
+          <div class="metric"><strong>2,400</strong><span>controlled responses</span></div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-pill">TF-IDF</span><span class="tech-pill">Logistic Regression</span><span class="tech-pill">Python</span><span class="tech-pill">scikit-learn</span><span class="tech-pill">Evaluation Methodology</span><span class="tech-pill">AI Detection</span>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-repo">github.com/ManasaK285/G2 ↗</span>
+        <span class="project-type">AI Detection · Evaluation Research · NLP</span>
+      </div>
+    </a>
     <!-- GROUNDEDMIND -->
     <a class="project-card" href="https://github.com/ManasaK285/G2" target="_blank" data-tags="research self-directed ml">
       <div class="project-accent violet"></div>
@@ -866,6 +1066,8 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
       <div class="cert-card"><div class="cert-dot pink"></div>Braze Marketer (2023)</div>
       <div class="cert-card"><div class="cert-dot pink"></div>IBM Quantum Achievement (2024)</div>
       <div class="cert-card"><div class="cert-dot amber"></div>Consumer Industry Program — Bronze (Deloitte, 2023)</div>
+      <div class="cert-card"><div class="cert-dot emerald"></div>Copado Certified Data 360 (2026)</div>
+      <div class="cert-card"><div class="cert-dot emerald"></div>Copado Certified Agentia Advanced (2026)</div>
     </div>
     <div class="tb-bar">
       <div class="tb-item"><strong>🏆</strong>Agentblazer Champion 2026</div>
