@@ -242,6 +242,30 @@ nav {
 
 footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5rem 3rem; display:flex; justify-content:space-between; font-family:var(--mono); font-size:11px; color:var(--faint); letter-spacing:0.05em; }
 
+/* ── MAIN TAB BAR ── */
+.tab-bar {
+  display:flex; gap:6px; flex-wrap:wrap; margin-bottom:2rem;
+  border-bottom:1px solid var(--border); padding-bottom:1rem;
+}
+.tab-btn {
+  font-family:var(--mono); font-size:12px; font-weight:500;
+  padding:7px 18px; border-radius:20px; border:1px solid var(--border);
+  background:transparent; color:var(--muted); cursor:pointer;
+  transition:all 0.2s ease; letter-spacing:0.03em;
+}
+.tab-btn:hover { border-color:var(--border2); color:var(--text); }
+.tab-btn.active {
+  background:var(--violet-light); border-color:var(--violet);
+  color:#c4b5fd;
+}
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+/* strip extra padding from inner sections when inside tab */
+.tab-panel .full-section, .tab-panel .section {
+  padding-top:0; padding-left:0; padding-right:0;
+}
+.tab-panel .section-inner { padding:0; max-width:100%; }
+
 /* ── CHATBOT ── */
 #chat-fab {
   position:fixed; bottom:2rem; right:2rem; z-index:200;
@@ -389,9 +413,9 @@ canvas#skills-radar { width:100%; max-width:480px; display:block; margin:0 auto;
     <a href="#notebooks">notebooks</a>
     <a href="#experience">experience</a>
     <a href="#education">education</a>
-    <a href="#certifications">certifications</a>
-    <a href="#awards">awards</a>
-    <a href="#skills-radar">skills</a>
+    <a href="#tabs-body" onclick="switchTab('certifications', document.querySelector('[onclick*=\'certifications\']'))">certifications</a>
+    <a href="#tabs-body" onclick="switchTab('awards', document.querySelector('[onclick*=\'awards\']'))">awards</a>
+    <a href="#tabs-body" onclick="switchTab('skills-radar', document.querySelector('[onclick*=\'skills-radar\']'))">skills</a>
     <a href="#flashcards">flashcards</a>
     <a href="#contact">contact</a>
   </div>
@@ -982,7 +1006,21 @@ canvas#skills-radar { width:100%; max-width:480px; display:block; margin:0 auto;
   <div class="fc-grid" id="fc-grid"></div>
 </section>
 
-<!-- KAGGLE / AI NOTEBOOK PROJECTS -->
+<!-- TABBED BODY -->
+<div class="full-section alt-section" id="tabs-body">
+<div class="section-inner">
+
+<div class="tab-bar" id="main-tab-bar">
+  <button class="tab-btn active" onclick="switchTab('notebooks',this)">Notebooks</button>
+  <button class="tab-btn" onclick="switchTab('experience',this)">Experience</button>
+  <button class="tab-btn" onclick="switchTab('education',this)">Education</button>
+  <button class="tab-btn" onclick="switchTab('certifications',this)">Certifications</button>
+  <button class="tab-btn" onclick="switchTab('awards',this)">Awards</button>
+  <button class="tab-btn" onclick="switchTab('skills-radar',this)">Skills</button>
+</div>
+
+<!-- TAB: NOTEBOOKS -->
+<div class="tab-panel active" id="tab-notebooks">
 <div class="full-section alt-section" id="notebooks">
   <div class="section-inner">
     <div class="section-header">
@@ -1032,9 +1070,10 @@ canvas#skills-radar { width:100%; max-width:480px; display:block; margin:0 auto;
     </div>
   </div>
 </div>
+</div><!-- /tab-notebooks -->
 
-
-<!-- EXPERIENCE -->
+<!-- TAB: EXPERIENCE -->
+<div class="tab-panel" id="tab-experience">
 <div class="full-section alt-section" id="experience">
   <div class="section-inner">
     <div class="section-header">
@@ -1149,8 +1188,10 @@ canvas#skills-radar { width:100%; max-width:480px; display:block; margin:0 auto;
     </div>
   </div>
 </div>
+</div><!-- /tab-experience -->
 
-<!-- EDUCATION -->
+<!-- TAB: EDUCATION -->
+<div class="tab-panel" id="tab-education">
 <section class="section" id="education">
   <div class="section-header">
     <span class="section-num">04</span>
@@ -1173,8 +1214,10 @@ canvas#skills-radar { width:100%; max-width:480px; display:block; margin:0 auto;
     </div>
   </div>
 </section>
+</div><!-- /tab-education -->
 
-<!-- CERTIFICATIONS -->
+<!-- TAB: CERTIFICATIONS -->
+<div class="tab-panel" id="tab-certifications">
 <div class="full-section alt-section" id="certifications">
   <div class="section-inner">
     <div class="section-header">
@@ -1222,8 +1265,10 @@ canvas#skills-radar { width:100%; max-width:480px; display:block; margin:0 auto;
     </div>
   </div>
 </div>
+</div><!-- /tab-certifications -->
 
-<!-- AWARDS -->
+<!-- TAB: AWARDS -->
+<div class="tab-panel" id="tab-awards">
 <section class="section" id="awards">
   <div class="section-header">
     <span class="section-num">06</span>
@@ -1309,8 +1354,10 @@ canvas#skills-radar { width:100%; max-width:480px; display:block; margin:0 auto;
     </div>
   </div>
 </section>
+</div><!-- /tab-awards -->
 
-<!-- SKILLS RADAR -->
+<!-- TAB: SKILLS RADAR -->
+<div class="tab-panel" id="tab-skills-radar">
 <div class="full-section alt-section" id="skills-radar">
   <div class="radar-inner">
     <div class="section-header">
@@ -1332,6 +1379,10 @@ canvas#skills-radar { width:100%; max-width:480px; display:block; margin:0 auto;
     </div>
   </div>
 </div>
+</div><!-- /tab-skills-radar -->
+
+</div><!-- /section-inner -->
+</div><!-- /tabs-body -->
 
 <!-- CHATBOT FAB -->
 <button id="chat-fab" onclick="toggleChat()" title="Ask me anything">💬</button>
@@ -1400,6 +1451,16 @@ canvas#skills-radar { width:100%; max-width:480px; display:block; margin:0 auto;
 </footer>
 
 <script>
+/* ── MAIN TAB SWITCHER ── */
+function switchTab(id, btn) {
+  document.querySelectorAll('#main-tab-bar .tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  // re-draw radar if switching to skills tab
+  if (id === 'skills-radar') { drawRadar(currentRadar); buildLegend(currentRadar); }
+}
+
 /* ── PROJECT FILTER ── */
 function filterProjects(tag, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
