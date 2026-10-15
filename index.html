@@ -242,6 +242,116 @@ nav {
 
 footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5rem 3rem; display:flex; justify-content:space-between; font-family:var(--mono); font-size:11px; color:var(--faint); letter-spacing:0.05em; }
 
+/* ── CHATBOT ── */
+#chat-fab {
+  position:fixed; bottom:2rem; right:2rem; z-index:200;
+  width:54px; height:54px; border-radius:50%; background:var(--violet);
+  border:none; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  box-shadow:0 0 32px var(--violet-glow); transition:transform 0.2s,box-shadow 0.2s;
+  font-size:22px;
+}
+#chat-fab:hover { transform:scale(1.08); box-shadow:0 0 48px var(--violet-glow); }
+#chat-panel {
+  position:fixed; bottom:5.5rem; right:2rem; z-index:200;
+  width:360px; max-height:520px; background:var(--card);
+  border:1px solid var(--border2); border-radius:16px;
+  display:none; flex-direction:column; overflow:hidden;
+  box-shadow:0 8px 64px rgba(0,0,0,0.5);
+  animation:slideUp 0.25s ease;
+}
+@keyframes slideUp { from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);} }
+#chat-panel.open { display:flex; }
+.chat-header {
+  padding:1rem 1.25rem; background:var(--bg2); border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.chat-header-left { display:flex; align-items:center; gap:10px; }
+.chat-avatar { width:32px; height:32px; border-radius:8px; background:linear-gradient(135deg,var(--violet),var(--pink)); display:flex; align-items:center; justify-content:center; font-size:14px; }
+.chat-title { font-family:var(--display); font-size:14px; font-weight:700; }
+.chat-subtitle { font-family:var(--mono); font-size:10px; color:var(--faint); }
+.chat-close { background:none; border:none; color:var(--muted); font-size:18px; cursor:pointer; padding:0 4px; }
+.chat-close:hover { color:var(--text); }
+#chat-messages {
+  flex:1; overflow-y:auto; padding:1rem; display:flex; flex-direction:column; gap:10px;
+  scrollbar-width:thin; scrollbar-color:var(--border) transparent;
+}
+.msg { max-width:85%; font-size:13px; line-height:1.65; padding:0.6rem 0.9rem; border-radius:12px; }
+.msg.bot { background:var(--bg2); border:1px solid var(--border); color:var(--muted); border-radius:4px 12px 12px 12px; }
+.msg.user { background:var(--violet); color:#fff; margin-left:auto; border-radius:12px 4px 12px 12px; }
+.chat-suggestions { padding:0.5rem 1rem; display:flex; flex-wrap:wrap; gap:6px; }
+.chat-chip {
+  font-family:var(--mono); font-size:10px; padding:4px 10px; border-radius:20px;
+  background:var(--violet-light); color:#c4b5fd; border:1px solid rgba(124,58,237,0.3);
+  cursor:pointer; transition:background 0.15s;
+}
+.chat-chip:hover { background:rgba(124,58,237,0.3); }
+.chat-input-row { padding:0.75rem 1rem; border-top:1px solid var(--border); display:flex; gap:8px; }
+#chat-input {
+  flex:1; background:var(--bg2); border:1px solid var(--border); border-radius:8px;
+  color:var(--text); font-family:var(--sans); font-size:13px; padding:8px 12px; outline:none;
+}
+#chat-input:focus { border-color:rgba(124,58,237,0.5); }
+#chat-send {
+  background:var(--violet); border:none; border-radius:8px; color:#fff;
+  padding:8px 14px; cursor:pointer; font-size:15px; transition:background 0.15s;
+}
+#chat-send:hover { background:#6d28d9; }
+
+/* ── FLASHCARDS ── */
+.flashcard-section { padding:5.5rem 3rem; max-width:1200px; margin:0 auto; position:relative; z-index:1; }
+.fc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; margin-top:2rem; }
+.fc-card {
+  background:var(--card); border:1px solid var(--border); border-radius:12px;
+  min-height:160px; cursor:pointer; perspective:1000px; position:relative;
+}
+.fc-inner {
+  width:100%; height:100%; position:relative; transform-style:preserve-3d;
+  transition:transform 0.55s cubic-bezier(.4,0,.2,1);
+}
+.fc-card.flipped .fc-inner { transform:rotateY(180deg); }
+.fc-front, .fc-back {
+  position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  padding:1.5rem; border-radius:12px; display:flex; flex-direction:column; justify-content:space-between;
+}
+.fc-back { transform:rotateY(180deg); background:var(--bg2); }
+.fc-category { font-family:var(--mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.5rem; }
+.fc-question { font-family:var(--display); font-size:1rem; font-weight:600; line-height:1.4; color:var(--text); }
+.fc-answer { font-size:12.5px; color:var(--muted); line-height:1.75; font-weight:300; }
+.fc-hint { font-family:var(--mono); font-size:10px; color:var(--faint); }
+.fc-controls { display:flex; align-items:center; justify-content:space-between; margin-top:1.5rem; }
+.fc-counter { font-family:var(--mono); font-size:11px; color:var(--faint); }
+.fc-nav { display:flex; gap:8px; }
+.fc-btn {
+  font-family:var(--mono); font-size:11px; padding:6px 14px; border-radius:20px;
+  border:1px solid var(--border2); background:transparent; color:var(--muted);
+  cursor:pointer; transition:all 0.15s;
+}
+.fc-btn:hover { background:var(--violet-light); color:#c4b5fd; border-color:rgba(124,58,237,0.4); }
+.fc-btn.primary { background:var(--violet); color:#fff; border-color:var(--violet); }
+.fc-btn.primary:hover { background:#6d28d9; }
+
+/* ── SKILLS RADAR ── */
+.radar-section { padding:5.5rem 3rem; position:relative; z-index:1; }
+.radar-inner { max-width:1200px; margin:0 auto; }
+.radar-layout { display:grid; grid-template-columns:1fr 340px; gap:4rem; align-items:center; }
+.radar-canvas-wrap { position:relative; }
+canvas#skills-radar { width:100%; max-width:480px; display:block; margin:0 auto; }
+.radar-legend { display:flex; flex-direction:column; gap:12px; }
+.radar-leg-item { display:flex; align-items:center; gap:10px; }
+.radar-leg-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.radar-leg-label { font-size:13px; color:var(--muted); font-weight:300; }
+.radar-leg-bar { flex:1; height:4px; background:var(--bg3); border-radius:2px; overflow:hidden; }
+.radar-leg-fill { height:100%; border-radius:2px; transition:width 1s ease; }
+.radar-tabs { display:flex; gap:8px; margin-bottom:1.5rem; flex-wrap:wrap; }
+.radar-tab { font-family:var(--mono); font-size:11px; padding:5px 14px; border-radius:20px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; transition:all 0.15s; }
+.radar-tab.active, .radar-tab:hover { background:var(--violet-light); color:#c4b5fd; border-color:rgba(124,58,237,0.3); }
+
+@media(max-width:800px){
+  #chat-panel{width:calc(100vw - 2rem);right:1rem;}
+  .radar-layout{grid-template-columns:1fr;}
+  .flashcard-section,.radar-section{padding:3.5rem 1.5rem;}
+}
+
 /* FILTER TABS */
 .filter-bar { display:flex; gap:8px; margin-bottom:2rem; flex-wrap:wrap; }
 .filter-btn { font-family:var(--mono); font-size:11px; padding:5px 14px; border-radius:20px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; transition:all 0.15s; letter-spacing:0.04em; }
@@ -280,6 +390,8 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
     <a href="#education">education</a>
     <a href="#certifications">certifications</a>
     <a href="#awards">awards</a>
+    <a href="#skills-radar">skills</a>
+    <a href="#flashcards">flashcards</a>
     <a href="#contact">contact</a>
   </div>
 </nav>
@@ -291,7 +403,7 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
       <div class="hero-eyebrow">ML Engineer &amp; AI Researcher</div>
       <h1 class="hero-name">Manasanjani<br><em>Kondapi</em></h1>
       <p class="hero-subtitle">Building AI systems that work in the real world.</p>
-      <p class="hero-bio">MS in Applied Machine Learning, <strong>University of Maryland</strong> (GPA 4.0, May 2026). Four years at <strong>Deloitte</strong> and <strong>Welspot</strong> deploying production AI agents, RAG pipelines, and multimodal ML systems for Fortune 500 clients. <strong>Winner — Anthropic × UMD Hackathon 2026</strong>. <strong>Agentblazer Champion 2026</strong>, 16x Salesforce Certified. First-author at <strong>RSS 2026</strong> (arXiv:2603.02004). AGA Datathon <strong>Finalist 2026</strong>.</p>
+      <p class="hero-bio">MS in Applied Machine Learning, <strong>University of Maryland</strong> (GPA 4.0, May 2026). 5+ years at <strong>Deloitte</strong>, <strong>Welspot</strong>, and <strong>JakeyMac Foundation</strong> shipping production LLM software features, RAG pipelines, and multimodal ML systems. <strong>Winner — Anthropic × UMD Hackathon 2026</strong>. <strong>Agentblazer Champion 2026</strong>, 16x Salesforce Certified. Co-author at <strong>RSS 2026</strong> (arXiv:2603.02004). AGA Datathon <strong>Finalist 2026</strong>.</p>
       <div class="hero-tags">
         <span class="tag tag-violet">LLMs &amp; Agents</span>
         <span class="tag tag-emerald">Multimodal ML</span>
@@ -320,7 +432,7 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
       </div>
       <div class="hcard-badges">
         <div class="hcard-badge pub">🏆 Anthropic × UMD Hackathon 2026 — Winner</div>
-        <div class="hcard-badge pub">RSS 2026 — Published · arXiv:2603.02004</div>
+        <div class="hcard-badge pub">RSS 2026 — Co-authored · arXiv:2603.02004</div>
         <div class="hcard-badge pub">AGA Datathon 2026 — Finalist</div>
         <div class="hcard-badge sf">Agentblazer Champion 2026</div>
         <div class="hcard-badge gpa">GPA 4.0 — MS Applied ML, UMD</div>
@@ -750,14 +862,14 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
           <div class="project-title-row"><h3 class="project-title">VLA Dataset (CHOP) — Vision-Language-Action Alignment</h3><span class="project-arrow">↗</span></div>
           <span class="pbadge pbadge-pub">RSS 2026 Published · arXiv:2603.02004</span>
         </div>
-        <p class="project-desc">Counterfactual preference labeling pipeline for VLA model alignment in the SCAND robot navigation dataset — analogous to RLHF/DPO preference data design. Designed annotation schema and contrastive trajectory pairs providing preference supervision for downstream robotic policy learning. Built data validation and QA pipelines enforcing consistency across 10,000+ multi-modal trajectory samples (vision, language, action). UMD / Children's Hospital of Philadelphia (CHOP) collaboration. Paper forthcoming at Robotics: Science and Systems 2026 — one of the top peer-reviewed robotics venues worldwide.</p>
+        <p class="project-desc">Counterfactual preference labeling pipeline for VLA model alignment in the SCAND robot navigation dataset — analogous to RLHF/DPO preference data design. Designed annotation schema and contrastive trajectory pairs providing preference supervision for downstream robotic policy learning. Built data validation and QA pipelines enforcing consistency across 10,000+ multi-modal trajectory samples (vision, language, action). UMD / Dinesh Manocha Lab (GAMMA Lab) — CHOP: Counterfactual Human-preference labels for visuomotor Policies. Published at Robotics: Science and Systems 2026 — one of the top peer-reviewed robotics venues worldwide.</p>
         <div class="project-metrics">
           <div class="metric"><strong>10K+</strong><span>trajectory pairs annotated</span></div>
           <div class="metric"><strong>3 modalities</strong><span>vision · language · action</span></div>
           <div class="metric"><strong>RSS 2026</strong><span>top-tier robotics venue</span></div>
         </div>
         <div class="tech-stack">
-          <span class="tech-pill">VLA alignment</span><span class="tech-pill">RLHF / DPO</span><span class="tech-pill">SCAND dataset</span><span class="tech-pill">preference labeling</span><span class="tech-pill">UMD / CHOP</span>
+          <span class="tech-pill">VLA alignment</span><span class="tech-pill">RLHF / DPO</span><span class="tech-pill">SCAND dataset</span><span class="tech-pill">preference labeling</span><span class="tech-pill">GAMMA Lab / UMD</span><span class="tech-pill">Ghost Robotics Vision60</span>
         </div>
       </div>
       <div class="project-footer">
@@ -916,17 +1028,33 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
       <div class="exp-item">
         <div>
           <div class="exp-period">Sep 2026 – Present</div>
-          <span class="exp-ebadge" style="background:var(--violet-light);color:#c4b5fd;border-color:rgba(124,58,237,0.3);">AI Engineer</span>
+          <span class="exp-ebadge" style="background:var(--violet-light);color:#c4b5fd;border-color:rgba(124,58,237,0.3);">AI Automation Engineer</span>
         </div>
         <div>
-          <div class="exp-role">AI Engineer</div>
+          <div class="exp-role">AI Automation Engineer</div>
           <div class="exp-company">JakeyMac Foundation · Nonprofit · Remote</div>
           <ul class="exp-points">
-            <li>Building AI-driven fundraising automation engine using LangGraph multi-agent orchestration, Claude API, and n8n workflow automation — designing donor intelligence pipelines, RAG-based prospect scoring, and personalized outreach generation at scale.</li>
-            <li>Architecting end-to-end automation across four fundraising channels (crowdfunding, corporate sponsors, DAFs, real estate donations) with GoHighLevel CRM integration, Chariot DAF platform, Twilio, and Stripe.</li>
-            <li>Implementing LLM personalization pipelines for donor segmentation and automated corporate sponsor outreach with predictive LTV modeling.</li>
+            <li>Shipped LLM-powered donor intelligence feature end to end: GPT-4o tool-calling interface, context construction pipeline, Kafka/BigQuery data backend, FastAPI shared API surface; evaluation and telemetry loop (Grafana, Pub/Sub); predictive LTV modeling; 30% donor LTV improvement measured end to end.</li>
+            <li>Designed agentic RAG pipelines for prospect scoring and personalized outreach generation across four fundraising channels (crowdfunding, corporate sponsors, DAFs, real estate donations) with GoHighLevel CRM integration and Chariot DAF platform.</li>
+            <li>Built evaluation loop proving whether each change improved donor outcomes: multi-signal monitoring, automated retraining triggers, and distribution shift detection.</li>
           </ul>
-          <div class="exp-tags"><span class="tech-pill">LangGraph</span><span class="tech-pill">Claude API</span><span class="tech-pill">n8n</span><span class="tech-pill">GoHighLevel</span><span class="tech-pill">Chariot</span><span class="tech-pill">RAG</span><span class="tech-pill">Twilio</span></div>
+          <div class="exp-tags"><span class="tech-pill">GPT-4o</span><span class="tech-pill">FastAPI</span><span class="tech-pill">Kafka</span><span class="tech-pill">BigQuery</span><span class="tech-pill">Grafana</span><span class="tech-pill">GoHighLevel</span><span class="tech-pill">RAG</span><span class="tech-pill">Predictive LTV</span></div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-period">Jun 2025 – May 2026</div>
+          <span class="exp-ebadge" style="background:var(--sky-light);color:var(--sky);border-color:rgba(14,165,233,0.3);">Research</span>
+        </div>
+        <div>
+          <div class="exp-role">Graduate Research Assistant</div>
+          <div class="exp-company">University of Maryland · GAMMA Lab &amp; Smela Lab</div>
+          <ul class="exp-points">
+            <li><strong>GAMMA Lab (Prof. Dinesh Manocha):</strong> Co-authored CHOP (RSS 2026, arXiv:2603.02004) — designed RLHF/DPO alignment dataset pipeline for 10K+ multimodal trajectory preference pairs; inter-annotator QA and quality validation; alignment dataset deployed on Ghost Robotics Vision60 quadruped.</li>
+            <li><strong>Smela Lab (Prof. Elisabeth Smela):</strong> Built structured annotation pipeline (CVAT) for large-scale microscopy data; produced validated ML training datasets for cell morphology and sensor response models; reproducible ground-truth labeling.</li>
+          </ul>
+          <div class="exp-tags"><span class="tech-pill">RLHF / DPO</span><span class="tech-pill">VLA alignment</span><span class="tech-pill">CVAT</span><span class="tech-pill">PyTorch</span><span class="tech-pill">Ghost Robotics Vision60</span><span class="tech-pill">RSS 2026</span></div>
         </div>
       </div>
 
@@ -939,9 +1067,9 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
           <div class="exp-role">AI Developer Intern</div>
           <div class="exp-company">Welspot · Business Health Intelligence · GCP</div>
           <ul class="exp-points">
-            <li>Architected enterprise RAG pipelines using LangChain and Vertex AI with SBERT embeddings and Pinecone vector indexing; improved contextual retrieval relevance by 30% for domain-specific medical queries.</li>
-            <li>Designed multi-signal anomaly detection (MRR/precision@k, embedding drift, LLM confidence) with two-of-three threshold voting for automated retraining via Vertex AI Pipelines; caught two genuine distributional shifts standard metrics missed.</li>
-            <li>Deployed full observability stack (ClearML, Grafana, BigQuery telemetry); implemented IAM/VPC zero-trust security for sensitive business data workloads.</li>
+            <li>Designed and shipped LLM-powered software feature end to end: tool-calling interface (LangChain multi-step orchestration, SBERT + Pinecone + BM25 fusion), context construction pipeline, FastAPI serving layer on GCP Cloud Run with Docker auto-scaling; validated model output across 4 iteration cycles; 30% contextual relevance improvement measured in evaluation loop.</li>
+            <li>Built evaluation and telemetry loop proving whether each change improved user outcomes: multi-signal quality monitoring (embedding drift, retrieval degradation, LLM inference confidence), automated Vertex AI Pipeline retraining triggers, 200+ golden evaluation cases; distribution shift detection catching 2 genuine model failures; reduced hallucination rate from 12% to 2%.</li>
+            <li>Applied TensorRT optimisation cutting end-to-end LLM inference latency 40% on Vertex AI; profiled GPU compute, memory, and host overhead; instrumented full observability stack (ClearML, Grafana, BigQuery).</li>
           </ul>
           <div class="exp-tags"><span class="tech-pill">LangChain</span><span class="tech-pill">Vertex AI</span><span class="tech-pill">GCP</span><span class="tech-pill">Pinecone</span><span class="tech-pill">ClearML</span><span class="tech-pill">Docker</span><span class="tech-pill">BigQuery</span></div>
         </div>
@@ -956,16 +1084,15 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
           <div class="exp-role">Consultant — Cloud &amp; AI Developer</div>
           <div class="exp-company">Deloitte · Fortune 500 Clients · 3.75 years</div>
           <ul class="exp-points">
-            <li>Deployed Einstein AI, Agentforce, and production LLM agents with tool calling and CRM integrations for Fortune 500 e-commerce clients; achieved 40% reduction in Tier-1 support latency and 25% increase in cross-channel engagement.</li>
-            <li>Built Salesforce Marketing Cloud campaigns end-to-end — HTML/CSS email design, AMPscript and SSJS personalisation, Journey Builder automations, REST/SOAP API triggers, and SQL-based audience segmentation across high-volume data.</li>
-            <li>Implemented Einstein Product Recommendations using collaborative filtering and behavioural ML algorithms; deployed Einstein Predictive Intelligence and Content Selection for personalised content ranking; integrated Interaction Studio (Personalization), Braze, and Marketo via webhooks and triggered campaigns.</li>
-            <li>Built and maintained Salesforce Data Cloud pipelines: data ingestion, modelling, Calculated Insights, segmentation, and activation for unified customer profiles across enterprise systems.</li>
-            <li>Worked on GenAI POCs involving ChatGPT, Google Cloud, and Slack app integrations; data analysis using Tableau, Datorama (Marketing Cloud Intelligence), Power BI, and Einstein Analytics; implemented ETL processes and custom Python data extraction solutions.</li>
-            <li>Engineered AWS Lambda/S3 serverless pipelines; deployed containerized microservices via Docker and Kubernetes; implemented multi-cloud identity governance using Azure Active Directory and AWS IAM zero-trust principles; maintained CI/CD pipelines.</li>
-            <li>Led sprint demos, participated in PI planning, identified and resolved edge cases; facilitated executive GenAI and Agentforce workshops for C-suite stakeholders across multiple Fortune 500 engagements.</li>
+            <li>Applied YOLO-based object detection on product catalog images to extract structured visual features (product category, attributes, visual similarity signals), feeding a downstream content matching system and recommendation engine; integrated vision outputs with user behavioral data for personalized product recommendations at scale across Fortune 500 retail clients.</li>
+            <li>Designed and shipped cross-functional AI software features across shared API surfaces used by 8+ concurrent Fortune 500 engineering teams: FastAPI REST APIs (versioned endpoints), LLM integration with external tools and APIs, SageMaker model serving, Docker/Kubernetes CI/CD, AWS Lambda/S3 serverless.</li>
+            <li>Developed ML models applied to large-scale datasets: QLoRA fine-tuned LLaMA 3 for query expansion, SBERT + Pinecone retrieval, A/B experimentation and causal analysis on behavioral datasets; drove 25% cross-channel engagement increase across statistically significant deployments.</li>
+            <li>Built end-to-end evaluation and telemetry loop surfacing model and data quality issues: automated quality scoring pipelines, output validation, anomaly detection, curated ground-truth evaluation sets, regression gating; reduced data error rate by over 85% across Fortune 500 production systems.</li>
+            <li>Built conversational AI chatbots on Dialogflow for Fortune 500 clients; designed intent taxonomies, entity extraction, and escalation flows integrated with enterprise CRM and ticketing systems; achieved 40% Tier-1 support latency reduction.</li>
+            <li>Led Salesforce platform implementations including Marketing Cloud, Data Cloud, and CRM integrations; built personalized customer journey workflows and LLM-driven email content generation pipelines for campaign personalization at scale.</li>
           </ul>
           <div class="exp-tags">
-            <span class="tech-pill">Agentforce</span><span class="tech-pill">Einstein AI</span><span class="tech-pill">Apex</span><span class="tech-pill">SFMC</span><span class="tech-pill">AMPscript</span><span class="tech-pill">SSJS</span><span class="tech-pill">Data Cloud</span><span class="tech-pill">AWS</span><span class="tech-pill">Docker</span><span class="tech-pill">Kubernetes</span><span class="tech-pill">Braze</span><span class="tech-pill">Marketo</span><span class="tech-pill">Tableau</span>
+            <span class="tech-pill">YOLO</span><span class="tech-pill">FastAPI</span><span class="tech-pill">LLaMA 3 / QLoRA</span><span class="tech-pill">SBERT + Pinecone</span><span class="tech-pill">SageMaker</span><span class="tech-pill">AWS</span><span class="tech-pill">Docker</span><span class="tech-pill">Kubernetes</span><span class="tech-pill">Dialogflow</span><span class="tech-pill">Salesforce Marketing Cloud</span><span class="tech-pill">Data Cloud</span><span class="tech-pill">Tableau</span>
           </div>
         </div>
       </div>
@@ -1008,7 +1135,7 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
 <!-- EDUCATION -->
 <section class="section" id="education">
   <div class="section-header">
-    <span class="section-num">03</span>
+    <span class="section-num">04</span>
     <h2 class="section-title">Education</h2>
   </div>
   <div class="edu-grid">
@@ -1034,7 +1161,7 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
   <div class="section-inner">
     <div class="section-header">
       <span class="section-num">05</span>
-      <h2 class="section-title">Certifications</h2>
+      <h2 class="section-title">Certifications &amp; Badges</h2>
     </div>
     <div class="cert-hero">
       <div class="cert-num">16x</div>
@@ -1081,7 +1208,7 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
 <!-- AWARDS -->
 <section class="section" id="awards">
   <div class="section-header">
-    <span class="section-num">05</span>
+    <span class="section-num">06</span>
     <h2 class="section-title">Awards &amp; Recognition</h2>
   </div>
   <div class="awards-grid">
@@ -1165,6 +1292,75 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
   </div>
 </section>
 
+<!-- SKILLS RADAR -->
+<div class="full-section alt-section" id="skills-radar">
+  <div class="radar-inner">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2 class="section-title">Skills Radar</h2>
+      <span class="section-hint">Click a tab to switch view</span>
+    </div>
+    <div class="radar-tabs">
+      <button class="radar-tab active" onclick="setRadar('core',this)">Core ML</button>
+      <button class="radar-tab" onclick="setRadar('infra',this)">Infrastructure</button>
+      <button class="radar-tab" onclick="setRadar('research',this)">Research</button>
+      <button class="radar-tab" onclick="setRadar('tools',this)">Tools &amp; Platforms</button>
+    </div>
+    <div class="radar-layout">
+      <div class="radar-canvas-wrap">
+        <canvas id="skills-radar" width="480" height="480"></canvas>
+      </div>
+      <div class="radar-legend" id="radar-legend"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FLASHCARDS -->
+<section class="flashcard-section" id="flashcards">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <h2 class="section-title">Know My Work</h2>
+    <span class="section-hint">Click any card to flip it</span>
+  </div>
+  <p style="font-size:13.5px;color:var(--muted);margin-bottom:0.5rem;font-weight:300;">A quick-flip reference across projects, research, and production work — useful context for any conversation about my background.</p>
+  <div style="display:flex;gap:8px;margin:1rem 0;flex-wrap:wrap;" id="fc-filter-bar">
+    <button class="fc-btn primary" onclick="filterFC('all',this)">All</button>
+    <button class="fc-btn" onclick="filterFC('research',this)">Research</button>
+    <button class="fc-btn" onclick="filterFC('production',this)">Production</button>
+    <button class="fc-btn" onclick="filterFC('projects',this)">Projects</button>
+    <button class="fc-btn" onclick="filterFC('stack',this)">Tech Stack</button>
+  </div>
+  <div class="fc-grid" id="fc-grid"></div>
+</section>
+
+<!-- CHATBOT FAB -->
+<button id="chat-fab" onclick="toggleChat()" title="Ask me anything">💬</button>
+<div id="chat-panel">
+  <div class="chat-header">
+    <div class="chat-header-left">
+      <div class="chat-avatar">🤖</div>
+      <div>
+        <div class="chat-title">Ask Manasa's Portfolio</div>
+        <div class="chat-subtitle">Instant answers about my work</div>
+      </div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">×</button>
+  </div>
+  <div id="chat-messages"></div>
+  <div class="chat-suggestions" id="chat-suggestions">
+    <span class="chat-chip" onclick="askChip(this)">What's CHOP / RSS 2026?</span>
+    <span class="chat-chip" onclick="askChip(this)">TensorRT work at Welspot?</span>
+    <span class="chat-chip" onclick="askChip(this)">What stack do you use?</span>
+    <span class="chat-chip" onclick="askChip(this)">Hackathon winner?</span>
+    <span class="chat-chip" onclick="askChip(this)">Deloitte experience?</span>
+    <span class="chat-chip" onclick="askChip(this)">Open to relocation?</span>
+  </div>
+  <div class="chat-input-row">
+    <input id="chat-input" placeholder="Ask anything about my background…" onkeydown="if(event.key==='Enter')sendChat()">
+    <button id="chat-send" onclick="sendChat()">→</button>
+  </div>
+</div>
+
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="contact-inner">
@@ -1204,6 +1400,7 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
 </footer>
 
 <script>
+/* ── PROJECT FILTER ── */
 function filterProjects(tag, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -1214,7 +1411,7 @@ function filterProjects(tag, btn) {
   });
 }
 
-// Scroll reveal
+/* ── SCROLL REVEAL ── */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
@@ -1224,6 +1421,278 @@ document.querySelectorAll('.project-card, .exp-item, .cert-card, .award-card, .e
   el.style.opacity = '0'; el.style.transform = 'translateY(16px)';
   el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
   observer.observe(el);
+});
+
+/* ══════════════════════════════════════
+   SKILLS RADAR
+══════════════════════════════════════ */
+const RADAR_DATA = {
+  core: {
+    labels: ['LLMs & Tool-Calling','RAG & Retrieval','Multimodal ML','Evaluation & Telemetry','RLHF / DPO','Computer Vision','RL & Robotics'],
+    values: [95,90,85,92,80,82,72],
+    colors: ['#a78bfa','#7c3aed','#ec4899','#10b981','#f59e0b','#0ea5e9','#f97316']
+  },
+  infra: {
+    labels: ['GCP / Vertex AI','AWS (SageMaker/EC2)','Docker / Kubernetes','FastAPI / REST','TensorRT / GPU','Kafka / BigQuery','CI/CD Pipelines'],
+    values: [88,82,85,92,80,78,80],
+    colors: ['#10b981','#f59e0b','#0ea5e9','#a78bfa','#ec4899','#7c3aed','#34d399']
+  },
+  research: {
+    labels: ['VLA Alignment','Preference Labeling','Contrastive Learning','Annotation Pipelines','Embodied AI','Statistical Eval','Multi-agent Systems'],
+    values: [88,90,78,85,75,80,85],
+    colors: ['#ec4899','#f59e0b','#a78bfa','#0ea5e9','#10b981','#7c3aed','#f97316']
+  },
+  tools: {
+    labels: ['PyTorch','LangChain / LangGraph','Salesforce Platform','ClearML / Grafana','Pinecone / FAISS','Claude / GPT-4o','Streamlit / React'],
+    values: [90,88,92,82,85,90,78],
+    colors: ['#f97316','#a78bfa','#0ea5e9','#10b981','#7c3aed','#ec4899','#f59e0b']
+  }
+};
+
+let currentRadar = 'core';
+function setRadar(key, btn) {
+  document.querySelectorAll('.radar-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentRadar = key;
+  drawRadar(key);
+  buildLegend(key);
+}
+
+function drawRadar(key) {
+  const canvas = document.getElementById('skills-radar');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const d = RADAR_DATA[key];
+  const W = canvas.width, H = canvas.height;
+  const cx = W/2, cy = H/2, R = Math.min(W,H)*0.38;
+  const n = d.labels.length;
+  ctx.clearRect(0,0,W,H);
+
+  // grid rings
+  for (let r = 1; r <= 5; r++) {
+    ctx.beginPath();
+    for (let i = 0; i < n; i++) {
+      const angle = (i/n)*Math.PI*2 - Math.PI/2;
+      const x = cx + Math.cos(angle)*(R*r/5);
+      const y = cy + Math.sin(angle)*(R*r/5);
+      i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = 'rgba(150,110,255,0.12)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // spokes
+  for (let i = 0; i < n; i++) {
+    const angle = (i/n)*Math.PI*2 - Math.PI/2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + Math.cos(angle)*R, cy + Math.sin(angle)*R);
+    ctx.strokeStyle = 'rgba(150,110,255,0.15)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // data fill
+  ctx.beginPath();
+  for (let i = 0; i < n; i++) {
+    const angle = (i/n)*Math.PI*2 - Math.PI/2;
+    const r = (d.values[i]/100)*R;
+    const x = cx + Math.cos(angle)*r;
+    const y = cy + Math.sin(angle)*r;
+    i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  }
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(124,58,237,0.18)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(167,139,250,0.85)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // data points
+  for (let i = 0; i < n; i++) {
+    const angle = (i/n)*Math.PI*2 - Math.PI/2;
+    const r = (d.values[i]/100)*R;
+    const x = cx + Math.cos(angle)*r;
+    const y = cy + Math.sin(angle)*r;
+    ctx.beginPath();
+    ctx.arc(x, y, 4, 0, Math.PI*2);
+    ctx.fillStyle = d.colors[i];
+    ctx.fill();
+  }
+
+  // labels
+  ctx.font = '500 11px JetBrains Mono, monospace';
+  for (let i = 0; i < n; i++) {
+    const angle = (i/n)*Math.PI*2 - Math.PI/2;
+    const lx = cx + Math.cos(angle)*(R+26);
+    const ly = cy + Math.sin(angle)*(R+26);
+    ctx.fillStyle = '#a8a8cc';
+    ctx.textAlign = lx < cx-5 ? 'right' : lx > cx+5 ? 'left' : 'center';
+    ctx.textBaseline = ly < cy-5 ? 'bottom' : ly > cy+5 ? 'top' : 'middle';
+    // wrap long labels
+    const words = d.labels[i].split(' ');
+    if (words.length > 2) {
+      const mid = Math.ceil(words.length/2);
+      ctx.fillText(words.slice(0,mid).join(' '), lx, ly-7);
+      ctx.fillText(words.slice(mid).join(' '), lx, ly+7);
+    } else {
+      ctx.fillText(d.labels[i], lx, ly);
+    }
+  }
+}
+
+function buildLegend(key) {
+  const d = RADAR_DATA[key];
+  const el = document.getElementById('radar-legend');
+  if (!el) return;
+  el.innerHTML = d.labels.map((lbl,i) => `
+    <div class="radar-leg-item">
+      <div class="radar-leg-dot" style="background:${d.colors[i]}"></div>
+      <div style="flex:1">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+          <span class="radar-leg-label">${lbl}</span>
+          <span style="font-family:var(--mono);font-size:11px;color:${d.colors[i]}">${d.values[i]}%</span>
+        </div>
+        <div class="radar-leg-bar"><div class="radar-leg-fill" style="width:${d.values[i]}%;background:${d.colors[i]}"></div></div>
+      </div>
+    </div>`).join('');
+}
+
+/* ══════════════════════════════════════
+   FLASHCARDS
+══════════════════════════════════════ */
+const FC_DATA = [
+  { cat:'research', catColor:'#f59e0b', q:'What is CHOP and where was it published?', a:'CHOP = Counterfactual Human-preference labels for visuomotor Policies. Co-authored at RSS 2026 (arXiv:2603.02004) with Dinesh Manocha\'s GAMMA Lab at UMD. Built the RLHF/DPO preference dataset pipeline for 10K+ multimodal trajectory pairs, deployed on a Ghost Robotics Vision60 quadruped.' },
+  { cat:'production', catColor:'#10b981', q:'What did you ship at Welspot?', a:'End-to-end LLM feature: LangChain tool-calling interface, SBERT + Pinecone + BM25 RAG pipeline, FastAPI on GCP Cloud Run. Built a 200+ golden-case evaluation loop; caught 2 distribution shifts standard metrics missed; reduced hallucination rate 12% → 2%; applied TensorRT cutting inference latency 40%.' },
+  { cat:'production', catColor:'#10b981', q:'What is your most impactful Deloitte project?', a:'YOLO-based object detection on product catalog images for Fortune 500 retail clients — extracted visual features feeding a content-matching and recommendation engine. Also: QLoRA fine-tuned LLaMA 3 for query expansion, SBERT + Pinecone retrieval, 85% data error reduction, 40% Tier-1 support latency cut via Dialogflow chatbots.' },
+  { cat:'production', catColor:'#10b981', q:'What are you building at JakeyMac Foundation?', a:'AI fundraising automation: GPT-4o tool-calling interface, Kafka/BigQuery data backend, FastAPI shared API surface, Grafana + Pub/Sub telemetry. Predictive LTV modeling across 4 fundraising channels. 30% donor LTV improvement measured end to end.' },
+  { cat:'projects', catColor:'#a78bfa', q:'What is AgentForge?', a:'LangGraph multi-agent coding harness with a Meta-Debugger that diagnoses and improves the workflow when an agent fails — not just the code. 3 parallel strategies run simultaneously (minimal, robust, test_first). Proven failure → diagnosis → recovery cycle. Open-source: github.com/ManasaK285/G2.' },
+  { cat:'projects', catColor:'#a78bfa', q:'What won the Anthropic × UMD Hackathon 2026?', a:'"Second Opinion" — 4 parallel Claude specialist agents (Optimist, Skeptic, Systems Thinker, Synthesizer) analyzing any uploaded medical report. Built in 24 hours using Claude Code. 97.3% clinical flag recall. React 18 frontend, Claude Code CLI spawning 4 parallel subprocesses.' },
+  { cat:'projects', catColor:'#a78bfa', q:'What is Dream-RSI?', a:'End-to-end implementation of the Dream-RSI framework (arXiv:2609.14858) — recursive self-improvement for code discovery. Full Discover-Evaluate-Store-Dream-Compare loop, 3 exploration policies (Greedy, Diverse, Adaptive), offline dreaming replaying historical trees without re-executing costly computations.' },
+  { cat:'stack', catColor:'#0ea5e9', q:'What is your primary ML stack?', a:'PyTorch (multi-GPU), HuggingFace, PEFT/QLoRA/LoRA, LangGraph, LangChain, SBERT + Pinecone + BM25, TensorRT, FastAPI, GCP Vertex AI + Cloud Run, AWS SageMaker, Docker/Kubernetes, ClearML, Grafana, BigQuery. Python 6 years production.' },
+  { cat:'stack', catColor:'#0ea5e9', q:'What evaluation frameworks do you use?', a:'Custom golden-case harnesses (200+ cases), NLI-based automated quality scoring, embedding drift + retrieval degradation + LLM confidence monitoring (2-of-3 voting logic), distribution shift detection, regression gating, A/B + causal analysis. Tools: ClearML, Grafana, LangSmith, BigQuery.' },
+  { cat:'research', catColor:'#f59e0b', q:'What is GroundedMind?', a:'Empirical test of embodied cognition: does grounding language models in synthetic sensory experience improve concept representation? Built SentenceTransformer baseline + MLP grounded model with InfoNCE contrastive learning across 8 sensory attributes. Result: 73.5% vs 57.2% text-only on novel concept association (p=0.0028).' },
+  { cat:'stack', catColor:'#0ea5e9', q:'What is your Salesforce / enterprise stack?', a:'16x Salesforce Certified — Agentblazer Champion 2026, Platform Developer I, Marketing Cloud full suite, Data Cloud Consultant, Agentforce Specialist. Also: Dialogflow, Braze, Marketo, Adobe Analytics, GCP Professional Data Engineer. 383 Trailhead badges, 13 Superbadges.' },
+  { cat:'research', catColor:'#f59e0b', q:'What was your capstone project at UMD?', a:'Multimodal Traffic State Prediction — novel Weather-Gated Attention (B5) architecture. 5-variant ablation across 173,903 frames (BDD100K). Scene Graph GAT for spatial relationship modeling. Macro F1 = 0.943 at 6.67ms/frame. +0.391 F1 gain over spatial-only baseline.' },
+  { cat:'production', catColor:'#10b981', q:'What does your evaluation loop look like?', a:'Multi-signal monitoring: embedding drift + retrieval degradation (MRR/precision@k) + LLM inference confidence. 2-of-3 threshold voting triggers automated Vertex AI Pipeline retraining. 200+ golden evaluation cases. Distribution shift detection catching failures standard accuracy metrics miss entirely.' },
+  { cat:'projects', catColor:'#a78bfa', q:'What is TrustLens?', a:'Study showing random train/test accuracy is insufficient for AI detection evaluation. Style-template holdout drops 93.8% → 82.67% (range 63–99% across splits), revealing the model learned style artifacts not true signal. Sanity check with randomized labels: 50.8%. 2,400 controlled responses across 7 scenarios.' },
+];
+
+let fcActive = [...FC_DATA];
+let fcFlipped = new Set();
+
+function renderFC() {
+  const grid = document.getElementById('fc-grid');
+  if (!grid) return;
+  grid.innerHTML = fcActive.map((card, i) => `
+    <div class="fc-card${fcFlipped.has(i)?' flipped':''}" onclick="flipCard(${i})">
+      <div class="fc-inner">
+        <div class="fc-front">
+          <div>
+            <div class="fc-category" style="color:${card.catColor}">${card.cat.toUpperCase()}</div>
+            <div class="fc-question">${card.q}</div>
+          </div>
+          <div class="fc-hint">tap to reveal →</div>
+        </div>
+        <div class="fc-back">
+          <div>
+            <div class="fc-category" style="color:${card.catColor}">${card.cat.toUpperCase()} · answer</div>
+            <div class="fc-answer">${card.a}</div>
+          </div>
+          <div class="fc-hint">tap to flip back</div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function flipCard(i) {
+  fcFlipped.has(i) ? fcFlipped.delete(i) : fcFlipped.add(i);
+  renderFC();
+}
+
+function filterFC(cat, btn) {
+  document.querySelectorAll('#fc-filter-bar .fc-btn').forEach(b => { b.classList.remove('primary'); });
+  btn.classList.add('primary');
+  fcFlipped.clear();
+  fcActive = cat === 'all' ? [...FC_DATA] : FC_DATA.filter(c => c.cat === cat);
+  renderFC();
+}
+
+/* ══════════════════════════════════════
+   CHATBOT (client-side, no API)
+══════════════════════════════════════ */
+const KB = [
+  { keys:['chop','rss','vla','rlhf','dpo','robotics','ghost','quadruped','manocha','gamma'], ans:'CHOP (Counterfactual Human-preference labels for visuomotor Policies) is my RSS 2026 publication (arXiv:2603.02004) with Prof. Dinesh Manocha\'s GAMMA Lab at UMD. I built the RLHF/DPO alignment dataset pipeline generating 10K+ multimodal trajectory preference pairs (vision, language, action), with inter-annotator QA and deployment on a Ghost Robotics Vision60 quadruped.' },
+  { keys:['welspot','tensorrt','latency','inference','40%','rag','hallucination'], ans:'At Welspot I shipped an end-to-end LLM feature: LangChain tool-calling interface, SBERT + Pinecone + BM25 RAG pipeline, FastAPI on GCP Cloud Run. I applied TensorRT to cut inference latency 40%. My evaluation loop — 200+ golden cases, multi-signal monitoring — reduced hallucination rate from 12% to 2% and caught 2 distribution shifts standard accuracy metrics missed entirely.' },
+  { keys:['deloitte','fortune 500','yolo','object detection','dialogflow','salesforce'], ans:'At Deloitte (3.75 years) I worked across Fortune 500 retail and enterprise clients. Highlights: YOLO object detection on product catalogs feeding recommendation engines, QLoRA fine-tuned LLaMA 3 for query expansion, 85% data error reduction via automated evaluation pipelines, 40% Tier-1 support latency reduction via Dialogflow chatbots, 25% cross-channel engagement uplift.' },
+  { keys:['jakeymac','jmf','foundation','fundraising','donor','ltv'], ans:'At JakeyMac Foundation I\'m building an AI fundraising automation engine: GPT-4o tool-calling interface, Kafka/BigQuery data backend, FastAPI shared API surface, Grafana + Pub/Sub telemetry. Predictive LTV modeling with 30% donor LTV improvement measured end to end.' },
+  { keys:['hackathon','anthropic','second opinion','medical','winner'], ans:'I won the Anthropic × UMD Hackathon 2026 (Health & Wellbeing track) with "Second Opinion" — a 4-agent medical report interpreter (Optimist, Skeptic, Systems Thinker, Synthesizer) running in parallel via Claude Code CLI. Built in 24 hours. 97.3% clinical flag recall.' },
+  { keys:['stack','tech','python','pytorch','langchain','langgraph','tools','use'], ans:'Core stack: PyTorch, HuggingFace/PEFT, LangGraph multi-agent orchestration, LangChain, SBERT + Pinecone + BM25, TensorRT, FastAPI, GCP Vertex AI, AWS SageMaker, Docker/Kubernetes, ClearML, Grafana, BigQuery. Python 6 years in production. Daily agentic coding with Claude Code and Cursor.' },
+  { keys:['gpa','grade','university','umd','maryland','ms','degree'], ans:'MS in Applied Machine Learning, University of Maryland (GPA 4.0, May 2026). Relevant coursework: Deep Learning, Computer Vision, NLP, Reinforcement Learning, Probabilistic ML, Responsible AI, Large-Scale Computing. Also served as Graduate TA for DSA for ML and Cloud Computing.' },
+  { keys:['salesforce','certified','agentforce','trailhead','marketing cloud','data cloud'], ans:'16x Salesforce Certified including Agentblazer Champion 2026, Platform Developer I, Data Cloud Consultant, Agentforce Specialist, full Marketing Cloud suite. 383 Trailhead badges, 13 Superbadges. GCP Professional Data Engineer certified as well.' },
+  { keys:['relocation','location','visa','opt','work authorization','available','hire','open'], ans:'Open to full-time roles immediately. Authorized to work in the US on F-1 OPT (active), open to relocation anywhere in the US. Based in College Park, MD.' },
+  { keys:['agentforge','langgraph','multi-agent','coding agent','meta'], ans:'AgentForge is my open-source LangGraph multi-agent coding harness with a Meta-Debugger that diagnoses and improves the workflow when an agent fails — not just retrying code but intervening at the orchestration level. 3 parallel strategies + proven failure→recovery cycle.' },
+  { keys:['contact','email','reach','phone','linkedin'], ans:'Best way to reach me: manasa.kondapi@gmail.com or +1 (240) 305-4455. Also on LinkedIn: linkedin.com/in/manasanjani-kondapi-92179b187 and GitHub: github.com/ManasaK285.' },
+  { keys:['evaluation','telemetry','golden','distribution shift','monitoring'], ans:'Evaluation is a core specialty — I build multi-signal monitoring loops (embedding drift + retrieval degradation + LLM confidence with 2-of-3 voting), 200+ golden evaluation cases, automated retraining triggers, regression gating, and distribution shift detection that catches failures standard accuracy metrics miss entirely.' },
+];
+
+const GREETINGS = ['hi','hello','hey','howdy','sup'];
+const FALLBACK = "I don't have a specific answer for that in my knowledge base, but feel free to email manasa.kondapi@gmail.com or check the sections above for the relevant project or experience detail!";
+
+function botReply(q) {
+  const ql = q.toLowerCase();
+  if (GREETINGS.some(g => ql.trim() === g || ql.startsWith(g+' ')))
+    return "Hi! I'm a chatbot for Manasa's portfolio. Ask me about her research, projects, tech stack, work experience, or anything in her background — I'll give you the real details.";
+  for (const entry of KB) {
+    if (entry.keys.some(k => ql.includes(k))) return entry.ans;
+  }
+  return FALLBACK;
+}
+
+let chatOpen = false;
+function toggleChat() {
+  chatOpen = !chatOpen;
+  const panel = document.getElementById('chat-panel');
+  panel.classList.toggle('open', chatOpen);
+  document.getElementById('chat-fab').textContent = chatOpen ? '✕' : '💬';
+  if (chatOpen && document.getElementById('chat-messages').children.length === 0) {
+    addMsg('bot', "👋 Hey! I can answer questions about Manasa's research, projects, production work, tech stack, or background. Try a suggestion below or ask anything.");
+  }
+}
+
+function addMsg(role, text) {
+  const wrap = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg ' + role;
+  div.textContent = text;
+  wrap.appendChild(div);
+  wrap.scrollTop = wrap.scrollHeight;
+}
+
+function sendChat() {
+  const inp = document.getElementById('chat-input');
+  const q = inp.value.trim();
+  if (!q) return;
+  addMsg('user', q);
+  inp.value = '';
+  document.getElementById('chat-suggestions').style.display = 'none';
+  setTimeout(() => addMsg('bot', botReply(q)), 320);
+}
+
+function askChip(el) {
+  const q = el.textContent;
+  addMsg('user', q);
+  document.getElementById('chat-suggestions').style.display = 'none';
+  setTimeout(() => addMsg('bot', botReply(q)), 320);
+}
+
+/* ── INIT ── */
+window.addEventListener('load', () => {
+  drawRadar('core');
+  buildLegend('core');
+  renderFC();
 });
 </script>
 
