@@ -316,6 +316,7 @@ footer { background:var(--bg); border-top:1px solid var(--border); padding:1.5re
 .fc-back { transform:rotateY(180deg); background:var(--bg2); }
 .fc-category { font-family:var(--mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.5rem; }
 .fc-question { font-family:var(--display); font-size:1rem; font-weight:600; line-height:1.4; color:var(--text); }
+.fc-qlabel { font-size:11.5px; color:var(--muted); font-weight:300; margin-top:0.4rem; line-height:1.5; font-style:italic; }
 .fc-answer { font-size:12.5px; color:var(--muted); line-height:1.75; font-weight:300; }
 .fc-hint { font-family:var(--mono); font-size:10px; color:var(--faint); }
 .fc-controls { display:flex; align-items:center; justify-content:space-between; margin-top:1.5rem; }
@@ -964,6 +965,23 @@ canvas#skills-radar { width:100%; max-width:480px; display:block; margin:0 auto;
   </div>
 </section>
 
+<!-- PROJECT FLASHCARDS -->
+<section class="flashcard-section" id="flashcards">
+  <div class="section-header">
+    <span class="section-num" style="font-size:0.8rem">✦</span>
+    <h2 class="section-title">Projects at a Glance</h2>
+    <span class="section-hint">Click any card to flip</span>
+  </div>
+  <p style="font-size:13.5px;color:var(--muted);margin-bottom:0.5rem;font-weight:300;">Quick-flip cards for every project — front shows the headline, back shows the how and the numbers.</p>
+  <div style="display:flex;gap:8px;margin:1rem 0;flex-wrap:wrap;" id="fc-filter-bar">
+    <button class="fc-btn primary" onclick="filterFC('all',this)">All</button>
+    <button class="fc-btn" onclick="filterFC('research',this)">Research</button>
+    <button class="fc-btn" onclick="filterFC('production',this)">Production</button>
+    <button class="fc-btn" onclick="filterFC('projects',this)">Open Source</button>
+  </div>
+  <div class="fc-grid" id="fc-grid"></div>
+</section>
+
 <!-- KAGGLE / AI NOTEBOOK PROJECTS -->
 <div class="full-section alt-section" id="notebooks">
   <div class="section-inner">
@@ -1315,24 +1333,6 @@ canvas#skills-radar { width:100%; max-width:480px; display:block; margin:0 auto;
   </div>
 </div>
 
-<!-- FLASHCARDS -->
-<section class="flashcard-section" id="flashcards">
-  <div class="section-header">
-    <span class="section-num">08</span>
-    <h2 class="section-title">Know My Work</h2>
-    <span class="section-hint">Click any card to flip it</span>
-  </div>
-  <p style="font-size:13.5px;color:var(--muted);margin-bottom:0.5rem;font-weight:300;">A quick-flip reference across projects, research, and production work — useful context for any conversation about my background.</p>
-  <div style="display:flex;gap:8px;margin:1rem 0;flex-wrap:wrap;" id="fc-filter-bar">
-    <button class="fc-btn primary" onclick="filterFC('all',this)">All</button>
-    <button class="fc-btn" onclick="filterFC('research',this)">Research</button>
-    <button class="fc-btn" onclick="filterFC('production',this)">Production</button>
-    <button class="fc-btn" onclick="filterFC('projects',this)">Projects</button>
-    <button class="fc-btn" onclick="filterFC('stack',this)">Tech Stack</button>
-  </div>
-  <div class="fc-grid" id="fc-grid"></div>
-</section>
-
 <!-- CHATBOT FAB -->
 <button id="chat-fab" onclick="toggleChat()" title="Ask me anything">💬</button>
 <div id="chat-panel">
@@ -1564,20 +1564,66 @@ function buildLegend(key) {
    FLASHCARDS
 ══════════════════════════════════════ */
 const FC_DATA = [
-  { cat:'research', catColor:'#f59e0b', q:'What is CHOP and where was it published?', a:'CHOP = Counterfactual Human-preference labels for visuomotor Policies. Co-authored at RSS 2026 (arXiv:2603.02004) with Dinesh Manocha\'s GAMMA Lab at UMD. Built the RLHF/DPO preference dataset pipeline for 10K+ multimodal trajectory pairs, deployed on a Ghost Robotics Vision60 quadruped.' },
-  { cat:'production', catColor:'#10b981', q:'What did you ship at Welspot?', a:'End-to-end LLM feature: LangChain tool-calling interface, SBERT + Pinecone + BM25 RAG pipeline, FastAPI on GCP Cloud Run. Built a 200+ golden-case evaluation loop; caught 2 distribution shifts standard metrics missed; reduced hallucination rate 12% → 2%; applied TensorRT cutting inference latency 40%.' },
-  { cat:'production', catColor:'#10b981', q:'What is your most impactful Deloitte project?', a:'YOLO-based object detection on product catalog images for Fortune 500 retail clients — extracted visual features feeding a content-matching and recommendation engine. Also: QLoRA fine-tuned LLaMA 3 for query expansion, SBERT + Pinecone retrieval, 85% data error reduction, 40% Tier-1 support latency cut via Dialogflow chatbots.' },
-  { cat:'production', catColor:'#10b981', q:'What are you building at JakeyMac Foundation?', a:'AI fundraising automation: GPT-4o tool-calling interface, Kafka/BigQuery data backend, FastAPI shared API surface, Grafana + Pub/Sub telemetry. Predictive LTV modeling across 4 fundraising channels. 30% donor LTV improvement measured end to end.' },
-  { cat:'projects', catColor:'#a78bfa', q:'What is AgentForge?', a:'LangGraph multi-agent coding harness with a Meta-Debugger that diagnoses and improves the workflow when an agent fails — not just the code. 3 parallel strategies run simultaneously (minimal, robust, test_first). Proven failure → diagnosis → recovery cycle. Open-source: github.com/ManasaK285/G2.' },
-  { cat:'projects', catColor:'#a78bfa', q:'What won the Anthropic × UMD Hackathon 2026?', a:'"Second Opinion" — 4 parallel Claude specialist agents (Optimist, Skeptic, Systems Thinker, Synthesizer) analyzing any uploaded medical report. Built in 24 hours using Claude Code. 97.3% clinical flag recall. React 18 frontend, Claude Code CLI spawning 4 parallel subprocesses.' },
-  { cat:'projects', catColor:'#a78bfa', q:'What is Dream-RSI?', a:'End-to-end implementation of the Dream-RSI framework (arXiv:2609.14858) — recursive self-improvement for code discovery. Full Discover-Evaluate-Store-Dream-Compare loop, 3 exploration policies (Greedy, Diverse, Adaptive), offline dreaming replaying historical trees without re-executing costly computations.' },
-  { cat:'stack', catColor:'#0ea5e9', q:'What is your primary ML stack?', a:'PyTorch (multi-GPU), HuggingFace, PEFT/QLoRA/LoRA, LangGraph, LangChain, SBERT + Pinecone + BM25, TensorRT, FastAPI, GCP Vertex AI + Cloud Run, AWS SageMaker, Docker/Kubernetes, ClearML, Grafana, BigQuery. Python 6 years production.' },
-  { cat:'stack', catColor:'#0ea5e9', q:'What evaluation frameworks do you use?', a:'Custom golden-case harnesses (200+ cases), NLI-based automated quality scoring, embedding drift + retrieval degradation + LLM confidence monitoring (2-of-3 voting logic), distribution shift detection, regression gating, A/B + causal analysis. Tools: ClearML, Grafana, LangSmith, BigQuery.' },
-  { cat:'research', catColor:'#f59e0b', q:'What is GroundedMind?', a:'Empirical test of embodied cognition: does grounding language models in synthetic sensory experience improve concept representation? Built SentenceTransformer baseline + MLP grounded model with InfoNCE contrastive learning across 8 sensory attributes. Result: 73.5% vs 57.2% text-only on novel concept association (p=0.0028).' },
-  { cat:'stack', catColor:'#0ea5e9', q:'What is your Salesforce / enterprise stack?', a:'16x Salesforce Certified — Agentblazer Champion 2026, Platform Developer I, Marketing Cloud full suite, Data Cloud Consultant, Agentforce Specialist. Also: Dialogflow, Braze, Marketo, Adobe Analytics, GCP Professional Data Engineer. 383 Trailhead badges, 13 Superbadges.' },
-  { cat:'research', catColor:'#f59e0b', q:'What was your capstone project at UMD?', a:'Multimodal Traffic State Prediction — novel Weather-Gated Attention (B5) architecture. 5-variant ablation across 173,903 frames (BDD100K). Scene Graph GAT for spatial relationship modeling. Macro F1 = 0.943 at 6.67ms/frame. +0.391 F1 gain over spatial-only baseline.' },
-  { cat:'production', catColor:'#10b981', q:'What does your evaluation loop look like?', a:'Multi-signal monitoring: embedding drift + retrieval degradation (MRR/precision@k) + LLM inference confidence. 2-of-3 threshold voting triggers automated Vertex AI Pipeline retraining. 200+ golden evaluation cases. Distribution shift detection catching failures standard accuracy metrics miss entirely.' },
-  { cat:'projects', catColor:'#a78bfa', q:'What is TrustLens?', a:'Study showing random train/test accuracy is insufficient for AI detection evaluation. Style-template holdout drops 93.8% → 82.67% (range 63–99% across splits), revealing the model learned style artifacts not true signal. Sanity check with randomized labels: 50.8%. 2,400 controlled responses across 7 scenarios.' },
+  {
+    cat:'research', catColor:'#f59e0b',
+    q:'CHOP · RSS 2026',
+    qlabel:'Counterfactual Human-preference labels for visuomotor Policies',
+    a:'Co-authored at RSS 2026 (arXiv:2603.02004) · GAMMA Lab, UMD (Prof. Dinesh Manocha). Built the RLHF/DPO preference dataset pipeline generating 10K+ multimodal trajectory pairs (vision × language × action). Designed inter-annotator QA pipelines. Deployed alignment evaluation on a Ghost Robotics Vision60 quadruped.'
+  },
+  {
+    cat:'research', catColor:'#f59e0b',
+    q:'GroundedMind',
+    qlabel:'Does sensory grounding improve language model concept representations?',
+    a:'Built SentenceTransformer text-only baseline + MLP grounded model with synthetic sensory world generator and InfoNCE contrastive learning across 8 sensory attributes. Statistical eval via permutation testing, RSA, Jensen-Shannon divergence, bootstrap CIs. Grounded model: 73.5% vs 57.2% text-only on novel concept association (p=0.0028).'
+  },
+  {
+    cat:'research', catColor:'#f59e0b',
+    q:'Multimodal Traffic Prediction · UMD Capstone',
+    qlabel:'Weather-Gated Attention architecture for real-time traffic state',
+    a:'Novel B5 Weather-Gated Attention architecture — 5-variant ablation across 173,903 frames (UA-DETRAC + BDD100K). Scene Graph GAT for spatial relationship modeling. Macro F1 = 0.943 at 6.67 ms/frame. +0.391 F1 gain over spatial-only baseline. BigQuery telemetry dashboard. Apache Spark distributed training.'
+  },
+  {
+    cat:'production', catColor:'#10b981',
+    q:'Welspot · LLM Feature + Evaluation Loop',
+    qlabel:'End-to-end RAG pipeline with TensorRT and multi-signal monitoring',
+    a:'Shipped tool-calling interface (LangChain, SBERT + Pinecone + BM25 fusion), FastAPI on GCP Cloud Run. Built 200+ golden-case eval loop — caught 2 distribution shifts standard accuracy missed. Hallucination rate: 12% → 2%. TensorRT optimisation: 40% inference latency reduction. 4 full iteration cycles with automated Vertex AI retraining.'
+  },
+  {
+    cat:'production', catColor:'#10b981',
+    q:'JakeyMac Foundation · Donor Intelligence',
+    qlabel:'GPT-4o tool-calling + predictive LTV for nonprofit fundraising',
+    a:'GPT-4o tool-calling interface, Kafka/BigQuery data backend, FastAPI shared API surface, Grafana + Pub/Sub telemetry loop. Predictive LTV modeling across 4 fundraising channels (crowdfunding, corporate sponsors, DAFs, real estate). Agentic RAG for prospect scoring and personalized outreach. 30% donor LTV improvement end to end.'
+  },
+  {
+    cat:'production', catColor:'#10b981',
+    q:'Deloitte · Fortune 500 ML Systems',
+    qlabel:'YOLO, LLaMA 3, Dialogflow, Salesforce — 3.75 years production',
+    a:'YOLO object detection on product catalogs → recommendation engine. QLoRA fine-tuned LLaMA 3 for query expansion + SBERT + Pinecone retrieval → 25% cross-channel engagement lift. Automated eval pipelines → 85% data error reduction. Dialogflow chatbots → 40% Tier-1 latency cut. 8+ concurrent Fortune 500 teams on shared FastAPI surfaces.'
+  },
+  {
+    cat:'projects', catColor:'#a78bfa',
+    q:'Second Opinion · Hackathon Winner',
+    qlabel:'4-agent medical report interpreter · Anthropic × UMD 2026',
+    a:'Won Anthropic × UMD Hackathon 2026 (Health & Wellbeing track). Four parallel Claude specialist agents — Optimist, Skeptic, Systems Thinker, Synthesizer — each reason independently over an uploaded medical report, then synthesize. Built entirely in 24 hours using Claude Code. 97.3% clinical flag recall. React 18 frontend.'
+  },
+  {
+    cat:'projects', catColor:'#a78bfa',
+    q:'AgentForge · Open Source',
+    qlabel:'LangGraph multi-agent coding harness with Meta-Debugger',
+    a:'Three parallel coding strategies (minimal, robust, test_first) run concurrently. Meta-Debugger intervenes at the orchestration level when any agent fails — diagnoses root cause and improves the workflow, not just retries code. SQLite trajectory persistence. FastAPI shared API surface. Streamlit evaluation dashboard. github.com/ManasaK285/G2'
+  },
+  {
+    cat:'projects', catColor:'#a78bfa',
+    q:'Dream-RSI',
+    qlabel:'Recursive self-improvement via offline replay simulation · arXiv:2609.14858',
+    a:'End-to-end implementation of the Dream-RSI framework. Full Discover-Evaluate-Store-Dream-Compare loop. Top-K candidate generation, correctness + runtime benchmarking, SQLite discovery trees with parent/child relationships. Three exploration policies: Greedy, Diverse, Adaptive. Offline dreaming replays historical trees under alternative policies without re-execution.'
+  },
+  {
+    cat:'projects', catColor:'#a78bfa',
+    q:'TrustLens',
+    qlabel:'Adversarial benchmark exposing overfitting in AI detection models',
+    a:'Style-template holdout shows standard accuracy (93.8%) collapses to 82.67% under distribution shift — range 63–99% across splits, proving models learned style artifacts not true signal. Randomized-label sanity check at 50.8% validates evaluation pipeline integrity. 2,400 controlled responses across 7 behavioral scenarios. 5-variant ablation.'
+  },
 ];
 
 let fcActive = [...FC_DATA];
@@ -1593,12 +1639,13 @@ function renderFC() {
           <div>
             <div class="fc-category" style="color:${card.catColor}">${card.cat.toUpperCase()}</div>
             <div class="fc-question">${card.q}</div>
+            ${card.qlabel ? `<div class="fc-qlabel">${card.qlabel}</div>` : ''}
           </div>
-          <div class="fc-hint">tap to reveal →</div>
+          <div class="fc-hint">tap to see details →</div>
         </div>
         <div class="fc-back">
           <div>
-            <div class="fc-category" style="color:${card.catColor}">${card.cat.toUpperCase()} · answer</div>
+            <div class="fc-category" style="color:${card.catColor}">${card.cat.toUpperCase()}</div>
             <div class="fc-answer">${card.a}</div>
           </div>
           <div class="fc-hint">tap to flip back</div>
